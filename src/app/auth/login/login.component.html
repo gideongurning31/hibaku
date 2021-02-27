@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="login-container">
+    <div class="login-box">
+      <div class="logo-box">
+        <img src="assets/Hibahku-logo.svg" class="logo" alt="HIBAHKU logo">
+      </div>
+      <h4 class="login-header">LOGIN</h4>
+      <hr>
+      <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="form-group">
+          <input type="text"
+            class="form-control"
+            id="inputUserId"
+            formControlName="user"
+            placeholder="User ID"
+            [ngClass]="{ 'field-error': loginForm.controls['user'].errors && loginForm.controls['user'].touched }">
+            <span *ngIf="loginForm.controls['user'].errors && loginForm.controls['user'].touched" class="form-error-message">
+              User ID wajib diisi.
+            </span>
+        </div>
+        <div class="form-group">
+          <input type="password"
+            class="form-control"
+            id="inputPass"
+            formControlName="pass"
+            placeholder="Password"
+            [ngClass]="{ 'field-error': loginForm.controls['pass'].errors && loginForm.controls['pass'].touched }">
+            <span *ngIf="loginForm.controls['pass'].errors && loginForm.controls['pass'].touched" class="form-error-message">
+              Password wajib diisi.
+            </span>
+        </div>
+        <small *ngIf="false" id="loginError" class="form-text">User ID dan/atau password salah</small>
+        <hr>
+        <button type="submit" class="btn btn-block btn-login">LOGIN</button>
+      </form>
+    </div>
+  </div>
+</div>

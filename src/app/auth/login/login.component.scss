@@ -1,0 +1,51 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  padding: 30px;
+  margin-top: 10%;
+  min-width: 500px;
+  background-color: var(--color3);
+  border: 2px solid var(--color1);
+  border-radius: 20px;
+  color: var(--color1);
+}
+
+.login-header {
+  text-align: center;
+  font-weight: bold;
+}
+
+.logo-box {
+  display: flex;
+  justify-content: center;
+}
+
+img.logo {
+  margin: 25px;
+  padding: 0;
+}
+
+.form-error-message, #loginError {
+  font-weight: bold;
+  color: var(--colorErr);
+}
+
+.field-error {
+  border: 2px solid var(--color1);
+}
+
+.btn-login,
+.btn-login:focus {
+  color: var(--color4);
+  background-color: var(--color1);
+  border-color: var(--color3);
+}
+
+.btn-login:hover {
+  color: var(--color1);
+  background-color: var(--color2);
+}
