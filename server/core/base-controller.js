@@ -12,7 +12,6 @@ class BaseController {
   }
 
   notImplemented(req, res) {
-    console.log(req);
     res.status(405).json({ error: `Request method ${req.method} not allowed on '${process.env.BASE_URL + req.url}'` });
   }
 

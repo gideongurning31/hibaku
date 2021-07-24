@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const middlewares = require('./middlewares/index');
 const controllers = require('./controllers/index');
+const HttpInterceptor = require('./middlewares/http-interceptor');
 
 app.get('/', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -14,5 +15,6 @@ app.disable('etag');
 app.use(middlewares.before);
 app.use(controllers);
 app.use(middlewares.after);
+app.use(HttpInterceptor.errorHandler);
 
 module.exports = app;

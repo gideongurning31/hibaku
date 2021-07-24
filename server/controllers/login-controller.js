@@ -22,18 +22,22 @@ class LoginController extends BaseController {
       .all(self.notImplemented);
   }
 
-  login(req, res) {
-    AuthService.login(req.body.username, req.body.password).then((result) => res.status(200).json(result));
+  login(req, res, next) {
+    AuthService.login(req.body.username, req.body.password)
+      .then((result) => res.status(200).json(result))
+      .catch(next);
   }
 
-  fetchUsers(req, res) {
-    UsersService.fetchUsers().then((result) => res.status(200).json(result));
+  fetchUsers(req, res, next) {
+    UsersService.fetchUsers()
+      .then((result) => res.status(200).json(result))
+      .catch(next);
   }
 
-  createUser(req, res) {
+  createUser(req, res, next) {
     UsersService.createUser(req.body)
       .then((result) => res.status(200).json(result))
-      .catch((err) => console.error(err));
+      .catch(next);
   }
 }
 
