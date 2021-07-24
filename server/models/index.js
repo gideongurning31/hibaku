@@ -1,4 +1,5 @@
 'use strict';
+require('moment-timezone').tz.setDefault(process.env.TZ);
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -10,9 +11,7 @@ let sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.
   dialect: process.env.DB_DRIVER,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  timezone: process.env.TZ,
   logging: parseInt(process.env.SQL_LOGGING) ? (str) => console.log(str) : false,
-  operatorsAliases: false,
   pool: {
     min: parseInt(process.env.DB_POOL_MIN),
     max: parseInt(process.env.DB_POOL_MAX),
