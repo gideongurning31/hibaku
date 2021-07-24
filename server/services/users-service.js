@@ -14,7 +14,10 @@ class UsersService {
   }
 
   login(user, pass) {
-    return this.findByUsername(user).then(user => bcrypt.compareSync(pass, user.pass));
+    return this.findByUsername(user).then(user => {
+      if (!user) return false;
+      return bcrypt.compareSync(pass, user.pass);
+    });
   }
 
   createUser(payload) {
