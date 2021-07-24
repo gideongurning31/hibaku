@@ -1,6 +1,6 @@
 const UsersModel = require('../models/index').Users;
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = process.env.BCRYPT_SALT;
 
 class UsersService {
   constructor() {}
@@ -11,13 +11,6 @@ class UsersService {
 
   findByUsername(username) {
     return UsersModel.findOne({ where: { userId: username }});
-  }
-
-  login(user, pass) {
-    return this.findByUsername(user).then(user => {
-      if (!user) return false;
-      return bcrypt.compareSync(pass, user.pass);
-    });
   }
 
   createUser(payload) {

@@ -1,6 +1,7 @@
 'use strict';
 let self;
 const BaseController = require('../core/base-controller');
+const AuthService = new (require('../services/authentication-service'))();
 const UsersService = new (require('../services/users-service'))();
 
 class LoginController extends BaseController {
@@ -22,7 +23,7 @@ class LoginController extends BaseController {
   }
 
   login(req, res) {
-    UsersService.login(req.body.username, req.body.password).then((result) => res.status(200).json(result));
+    AuthService.login(req.body.username, req.body.password).then((result) => res.status(200).json(result));
   }
 
   fetchUsers(req, res) {
