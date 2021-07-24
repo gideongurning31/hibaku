@@ -15,6 +15,6 @@ export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    return false;
+    return true;
   }
 }

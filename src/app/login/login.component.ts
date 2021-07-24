@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../utils/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +28,9 @@ export class LoginComponent implements OnInit {
     this.validateForm();
   }
 
-  private validateForm(): boolean {
-    return true;
+  private validateForm() {
+    const payload = this.loginForm.value;
+    return this.authService.login(payload.user, payload.pass)
+      .subscribe((result) => console.log('===', result));
   }
-
 }

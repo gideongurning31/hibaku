@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginGuard, RouteGuard } from './utils/service/route-guard.service';
+import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './utils/component/not-found.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./auth/auth.module').then((load) => load.AuthModule),
+    canActivate: [LoginGuard],
+    component: LoginComponent,
   },
   {
     path: '',
+    canActivate: [RouteGuard],
     loadChildren: () => import('./menu/menu.module').then((load) => load.MenuModule),
   },
   {
