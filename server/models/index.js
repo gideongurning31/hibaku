@@ -23,7 +23,7 @@ let sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.
 fs.readdirSync(__dirname)
   .filter((file) => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
   .forEach((file) => {
-    let model = sequelize['import'](path.join(__dirname, file));
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
