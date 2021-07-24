@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpUtilService } from '../utils/http-util.service';
+import { HttpUtilService } from '../utils/service/http-util.service';
 
 @Injectable()
 export class AuthService {
