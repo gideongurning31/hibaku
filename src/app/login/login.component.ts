@@ -41,6 +41,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
         this.snackBar.open('Login berhasil.', 'x', { duration: 2500, horizontalPosition: 'end', verticalPosition: 'bottom' });
       }, (err) => {
         console.error(err);
+        this.setSpinner(false);
+        this.snackBar.open('Login gagal', 'x', { duration: 2500, horizontalPosition: 'end', verticalPosition: 'bottom' });
       });
   }
 }

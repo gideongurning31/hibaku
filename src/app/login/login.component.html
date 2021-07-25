@@ -31,7 +31,7 @@
         </div>
         <small *ngIf="false" id="loginError" class="form-text">User ID dan/atau password salah</small>
         <hr>
-        <button type="submit" class="btn btn-block btn-login">LOGIN</button>
+        <button type="submit" class="btn btn-block btn-login" [disabled]="!loginForm.valid">LOGIN</button>
       </form>
     </div>
   </div>

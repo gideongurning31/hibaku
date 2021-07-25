@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/utils/service/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ export class DashboardComponent implements OnInit {
   navMenu: Array<Menu>;
   showFiller: boolean;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.showFiller = false;
@@ -35,7 +36,9 @@ export class DashboardComponent implements OnInit {
     ];
   }
 
-  logout() {}
+  logout() {
+    this.authService.logout();
+  }
 }
 
 interface UserProfile {

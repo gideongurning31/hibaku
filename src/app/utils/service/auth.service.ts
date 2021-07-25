@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpUtilService } from './http-util.service';
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
@@ -6,7 +7,7 @@ import { TokenPayload } from '../model/TokenPayload.model';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpUtilService) {}
+  constructor(private router: Router, private http: HttpUtilService) {}
 
   login(username: string, password: string) {
     const api = 'http://localhost:3000/api/login';
@@ -24,5 +25,10 @@ export class AuthService {
       localStorage.setItem('roleId', payload.roles[0].roleId);
       localStorage.setItem('roleName', payload.roles[0].roleName);
     }
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 }
