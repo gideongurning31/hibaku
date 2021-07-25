@@ -1,6 +1,19 @@
 .registrasi-container {
   min-height: 80vh;
   min-width: 70vw;
+}
+
+.button-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+button.btn {
+  min-width: 500px;
+  padding: 10px;
+}
+
+button:disabled {
+  opacity: .3;
+  cursor: not-allowed;
 }

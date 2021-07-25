@@ -1,3 +1,73 @@
 <div class="registrasi-container">
-  <p>REGISTRASI PRODUSEN/PENERIMA HIBAHKU</p>
+  <h5 style="text-align: center; font-weight: bold;">REGISTRASI AKUN HIBAHKU</h5>
+  <hr>
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">Jenis Akun:</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="radio" formControlName="accountType" class="form-check-input" id="accountType1" value="PRODUSEN" />
+      <label class="form-check-label" for="accountType1">PRODUSEN</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="radio" formControlName="accountType" class="form-check-input" id="accountType2" value="PENERIMA" />
+      <label class="form-check-label" for="accountType2">PENERIMA HIBAH</label>
+    </div>
+    <hr>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputNik">NIK:</label>
+        <input type="text" formControlName="nik" class="form-control" id="inputNik">
+        <small class="form-text text-muted">*16 digit Nomor Induk KTP tanpa spasi dan/atau tanda "-"</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputFirstName">Nama Depan:</label>
+        <input type="text" formControlName="firstName" class="form-control" id="inputFirstName">
+        <small class="form-text text-muted">*Nama sesuai KTP</small>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputLastName">Nama Belakang:</label>
+        <input type="text" formControlName="lastName" class="form-control" id="inputLastName">
+        <small class="form-text text-muted">*Kosongkan jika tidak ada</small>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputBirthPlace">Tempat Lahir:</label>
+        <input type="text" formControlName="birthPlace" class="form-control" id="inputBirthPlace" placeholder="Kota/Kabupaten">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputBirthDate">Tanggal Lahir:</label>
+        <input type="date" formControlName="birthDate" class="form-control" id="inputBirthDate">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress1">Alamat:</label>
+      <input type="text" formControlName="address1" class="form-control" id="inputAddress1">
+      <small class="form-text text-muted">*Alamat sesuai KTP (tanpa kelurahan/kecamatan dan kota).</small>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="inputAddress2">Desa/Kelurahan:</label>
+        <input type="text" formControlName="address2" class="form-control" id="inputAddress2">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputAddress3">Kecamatan:</label>
+        <input type="text" formControlName="address3" class="form-control" id="inputAddress3">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputCity">Kabupaten/Kota:</label>
+        <input type="text" formControlName="city" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputZip">Kode Pos:</label>
+        <input type="text" formControlName="zipCode" class="form-control" id="inputZip">
+      </div>
+    </div>
+    <hr>
+    <div class="button-container">
+      <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">KIRIM</button>
+      <button type="button" class="btn btn-danger" (click)="close()">BATAL</button>
+    </div>
+  </form>
 </div>
