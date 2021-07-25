@@ -18,7 +18,7 @@ class HttpInterceptor {
     } else if (err instanceof ApplicationError) {
       res.status(err.status).json({ message: err.message });
     } else {
-      console.error(error);
+      console.error(err);
       res.status(500).json({ message: err.message });
     }
   }

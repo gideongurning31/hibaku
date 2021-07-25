@@ -1,7 +1,7 @@
 let self;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const UsersModel = require('../models/index').Users;
+const UserService = new (require('../services/users-service'))();
 const BadCredentialError = require('../errors/bad-credentials-error');
 
 class AuthenticationService {
@@ -15,12 +15,13 @@ class AuthenticationService {
     self = this;
   }
 
-  login(user, pass) {
-    return UsersModel.findOne({ where: { userId: user }}).then(user => {
+  login(userId, pass) {
+    return UserService.findByUsername(userId).then((user) => {
       if (!user || !bcrypt.compareSync(pass, user.pass)) {
         throw new BadCredentialError('Wrong username and/or password combination.');
       }
-      return this.generateJwt({ id: user.userId, name: user.displayName });
+      delete user.dataValues.pass;
+      return this.generateJwt(user.dataValues);
     });
   }
 
