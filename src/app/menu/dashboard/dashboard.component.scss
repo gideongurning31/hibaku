@@ -14,6 +14,11 @@ mat-sidenav {
   text-align: center;
 }
 
+.menu-logo {
+  color: #FFF;
+  font-size: 100px;
+}
+
 .content {
   height: calc(100vh - 98px);
   border-radius: 10px;
@@ -43,11 +48,6 @@ mat-sidenav-container {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-}
-
-.profile-name {
-  margin-top: 8px;
-  font-weight: normal;
 }
 
 .profile-role {
