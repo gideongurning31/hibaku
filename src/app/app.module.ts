@@ -1,7 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { UtilsModule } from './utils/utils.module';
@@ -10,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, AppRoutingModule, UtilsModule],
+  imports: [BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, MatSnackBarModule, AppRoutingModule, UtilsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
