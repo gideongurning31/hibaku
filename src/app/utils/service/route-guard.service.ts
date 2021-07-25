@@ -6,7 +6,9 @@ export class RouteGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    return true;
+    if (localStorage.getItem('sessionToken')) return true;
+    this.router.navigate(['login']);
+    return false;
   }
 }
 
@@ -15,6 +17,8 @@ export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    return true;
+    if (!localStorage.getItem('sessionToken')) return true;
+    this.router.navigate(['/']);
+    return false;
   }
 }

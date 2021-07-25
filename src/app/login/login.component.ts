@@ -25,12 +25,13 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.validateForm();
-  }
-
-  private validateForm() {
     const payload = this.loginForm.value;
     return this.authService.login(payload.user, payload.pass)
-      .subscribe((result) => console.log('===', result));
+      .subscribe((token: string) => {
+        this.authService.storeSessionToken(token);
+        this.router.navigate(['/']);
+      }, (err) => {
+        console.error(err);
+      });
   }
 }

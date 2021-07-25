@@ -29,7 +29,7 @@ class AuthenticationService {
     return new Promise((resolve, reject) => {
       jwt.sign(payload, this.jwtSecret, this.jwtOptions, (err, token) => {
         if (err || !token) reject(err);
-        else resolve({ token });
+        else resolve(token);
       });
     });
   }
