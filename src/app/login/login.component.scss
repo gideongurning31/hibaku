@@ -5,9 +5,9 @@
 }
 
 .login-box {
-  padding: 30px;
-  margin-top: 10%;
-  min-width: 500px;
+  padding: 30px 40px;
+  margin-top: 5%;
+  min-width: 600px;
   background-color: var(--color3);
   border: 2px solid var(--color1);
   border-radius: 20px;
@@ -48,4 +48,10 @@ img.logo {
 .btn-login:hover {
   color: var(--color1);
   background-color: var(--color2);
+}
+
+.btn-login:disabled {
+  cursor: not-allowed;
+  color: var(--color2);
+  background-color: var(--color1);
 }
