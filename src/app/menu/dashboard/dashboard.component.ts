@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { AuthService } from 'src/app/utils/service/auth.service';
 
 @Component({
@@ -7,13 +11,14 @@ import { AuthService } from 'src/app/utils/service/auth.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('sidenav') sidenav: MatSidenav;
   profile: UserProfile;
   navMenu: Array<Menu>;
   showFiller: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private observer: BreakpointObserver) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.showFiller = false;
     this.initUserProfile();
     this.initMenu();
@@ -29,11 +34,15 @@ export class DashboardComponent implements OnInit {
 
   initMenu() {
     this.navMenu = [
-      { name: 'Menu 1', icon: 'fa-circle', route: '' },
-      { name: 'Menu 2', icon: 'fa-circle', route: '' },
-      { name: 'Menu 3', icon: 'fa-circle', route: '' },
-      { name: 'Menu 4', icon: 'fa-circle', route: '' },
+      { name: 'Beranda', icon: 'fa-home', route: '' },
+      { name: 'Registrasi Produsen', icon: 'fa-cart-plus', route: 'registrasi-produsen' },
+      { name: 'Registrasi Penerima', icon: 'fa-shopping-basket', route: 'registrasi-penerima' },
     ];
+  }
+
+  navigate(path: string) {
+    this.router.navigate([path]);
+    this.sidenav.close();
   }
 
   logout() {
