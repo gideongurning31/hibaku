@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { UtilsModule } from './utils/utils.module';
 import { AppComponent } from './app.component';

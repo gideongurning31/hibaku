@@ -1,16 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { BaseFormComponent } from '../utils/component/base-form.component';
+import { RegistrasiService } from './registrasi.service';
+import { SpinnerCloakService } from '../utils/component/spinner-cloak/spinner-cloak.service';
+import { RegistrasiUser } from './Registrasi.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'hibahku-registrasi',
   templateUrl: './registrasi.component.html',
   styleUrls: ['../login/login.component.scss', './registrasi.component.scss'],
+  providers: [RegistrasiService],
 })
-export class RegistrasiComponent implements OnInit {
+export class RegistrasiComponent extends BaseFormComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<RegistrasiComponent>) {}
+  constructor(private dialogRef: MatDialogRef<RegistrasiComponent>, private registerService: RegistrasiService, dialog: MatDialog, spinner: SpinnerCloakService) {
+    super(dialog, spinner);
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -33,7 +41,28 @@ export class RegistrasiComponent implements OnInit {
   }
 
   submit() {
-    console.info('===', this.registerForm.value);
+    const form = this.registerForm.value;
+    this.setSpinner(true);
+    return this.registerService
+      .registerUser({
+        nik: form.nik,
+        firstName: form.firstName,
+        lastName: form.lastName,
+        birthPlace: form.birthPlace,
+        birthDate: moment(form.birthDate, 'YYYY-MM-DD').format('YYYYMMDD'),
+        city: form.city,
+        address: form.address1.concat(` Desa/Kelurahan ${form.address2}`).concat(` Kecamatan ${form.address3}`),
+        zipCode: form.zipCode,
+        accountType: AccountType[form.accountType],
+      })
+      .subscribe((resp: RegistrasiUser) => {
+        this.setSpinner(false);
+        this.close();
+        this.alertDialog(`NIK ${resp.nik} berhasil didaftarkan.`);
+      }, (err) => {
+        this.setSpinner(false);
+        this.alertDialog('Pendaftaran gagal.');
+      });
   }
 
   close() {
@@ -43,6 +72,6 @@ export class RegistrasiComponent implements OnInit {
 }
 
 enum AccountType {
-  TYPE1 = 'PRODUSEN',
-  TYPE2 = 'PENERIMA',
+  PRODUSEN = '2',
+  PENERIMA = '3',
 }
