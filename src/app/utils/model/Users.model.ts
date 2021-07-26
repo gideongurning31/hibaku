@@ -4,5 +4,5 @@ export interface Users {
   userId: string;
   displayName: string;
   verified: boolean;
-  roles: Array<Roles>;
+  role: Roles;
 }

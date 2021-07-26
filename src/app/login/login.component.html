@@ -6,7 +6,7 @@
       </div>
       <h4 class="login-header">LOGIN</h4>
       <hr>
-      <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
         <div class="form-group">
           <input type="text"
             class="form-control"
@@ -30,8 +30,9 @@
             </span>
         </div>
         <small *ngIf="false" id="loginError" class="form-text">User ID dan/atau password salah</small>
-        <hr>
         <button type="submit" class="btn btn-block btn-login" [disabled]="!loginForm.valid">LOGIN</button>
+        <hr>
+        <button type="button" class="btn btn-block btn-warning" (click)="register()">REGISTRASI PRODUSEN / PENERIMA</button> 
       </form>
     </div>
   </div>
