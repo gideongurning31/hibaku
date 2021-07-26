@@ -1,38 +1,35 @@
 const Model = require('../models/index');
-const UsersModel = Model.Users;
+const AccountsModel = Model.Accounts;
 const UsersInfoModel = Model.UsersInfo;
 const RolesModel = Model.Roles;
-const bcrypt = require('bcrypt');
 const moment = require('moment');
-const BadRequestError = require('../errors/bad-request-error');
+const bcrypt = require('bcrypt');
 const saltRounds = parseInt(process.env.BCRYPT_SALT);
+const BadRequestError = require('../errors/bad-request-error');
 
 class UsersService {
   constructor() {}
 
-  fetchUsers() {
-    return UsersModel.findAll({ where: { verified: true } });
-  }
-
-  fetchUsersDetails() {
-    return UsersInfoModel.findAll();
-  }
-
-  findByUsername(username) {
-    return UsersModel.findOne({
-      where: { userId: username },
-      include: [{ model: RolesModel, attributes: [['id', 'roleId'], ['name', 'roleName']], as: 'roles' }]
+  fetchAccounts() {
+    return AccountsModel.findAll({
+      where: { verified: true },
+      include: [{ model: RolesModel, as: 'role' }],
     });
   }
 
-  createUser(payload) {
-    const salt = bcrypt.genSaltSync(saltRounds);
-    payload.pass = bcrypt.hashSync(payload.pass, salt);
-    return UsersModel.create(payload);
+  fetchUsers() {
+    return UsersInfoModel.findAll();
+  }
+
+  findByAccountName(username) {
+    return AccountsModel.findOne({
+      where: { userId: username },
+      include: [{ model: RolesModel, as: 'role' }],
+    });
   }
 
   registerUser(user) {
-    delete user.userId;
+    if (user.userId) delete user.userId;
     user.birthDate = new Date(moment(user.birthDate, 'YYYYMMDD'));
     return UsersInfoModel.findOne({ where: { nik: user.nik } }).then((result) => {
       if (result) throw new BadRequestError(`NIK ${user.nik} sudah terdaftar.`);
@@ -44,23 +41,17 @@ class UsersService {
     let updatedUser;
     return UsersInfoModel.findOne({ where: { nik: payload.nik } })
       .then((info) => {
-        if (!info) throw new BadRequestError(`NIK ${payload.nik} belum didaftarkan.`);
+        if (!info) throw new BadRequestError(`NIK ${payload.nik} belum terdaftar.`);
         updatedUser = info.dataValues;
-        return this.createUser({
+        updatedUser.userId = payload.userId;
+        return AccountsModel.create({
           userId: payload.userId,
-          pass: payload.pass,
+          pass: bcrypt.hashSync(payload.pass, bcrypt.genSaltSync(saltRounds)),
           displayName: info.lastName ? `${info.firstName} ${info.lastName}` : info.firstName,
-          verified: true
+          verified: true,
         });
       })
-      .then(() => {
-        updatedUser.userId = payload.userId;
-        return UsersInfoModel.update(updatedUser, { where: { nik: payload.nik } });
-      });
-  }
-
-  fetchRoles() {
-    return RolesModel.findAll({});
+      .then(() => UsersInfoModel.update(updatedUser, { where: { nik: payload.nik } }));
   }
 }
 

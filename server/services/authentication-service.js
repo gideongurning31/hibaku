@@ -16,9 +16,9 @@ class AuthenticationService {
   }
 
   login(userId, pass) {
-    return UserService.findByUsername(userId).then((user) => {
+    return UserService.findByAccountName(userId).then((user) => {
       if (!user || !bcrypt.compareSync(pass, user.pass)) {
-        throw new BadCredentialError('Wrong username and/or password combination.');
+        throw new BadCredentialError('Kombinasi username dan/atau password salah.');
       }
       delete user.dataValues.pass;
       return this.generateJwt(user.dataValues);
