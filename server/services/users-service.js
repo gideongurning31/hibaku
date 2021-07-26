@@ -38,20 +38,21 @@ class UsersService {
   }
 
   createAccount(payload) {
-    let updatedUser;
+    let user;
     return UsersInfoModel.findOne({ where: { nik: payload.nik } })
       .then((info) => {
         if (!info) throw new BadRequestError(`NIK ${payload.nik} belum terdaftar.`);
-        updatedUser = info.dataValues;
-        updatedUser.userId = payload.userId;
+        user = info.dataValues;
+        user.userId = payload.userId;
         return AccountsModel.create({
           userId: payload.userId,
           pass: bcrypt.hashSync(payload.pass, bcrypt.genSaltSync(saltRounds)),
           displayName: info.lastName ? `${info.firstName} ${info.lastName}` : info.firstName,
+          roleId: parseInt(user.accountType),
           verified: true,
         });
       })
-      .then(() => UsersInfoModel.update(updatedUser, { where: { nik: payload.nik } }));
+      .then(() => UsersInfoModel.update(user, { where: { nik: payload.nik } }));
   }
 }
 

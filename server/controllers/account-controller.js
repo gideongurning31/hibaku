@@ -11,8 +11,8 @@ class AccountController extends BaseController {
   }
 
   registerRoutes() {
-    self.router.route('/api/account').get(self.getAllAccount).all(self.notImplemented);
-    self.router.route('/api/register').all(self.notImplemented);
+    self.router.route('/api/account').get(self.getAllAccount).post(self.createAccount).all(self.notImplemented);
+    self.router.route('/api/user').get(self.getAllUser).post(self.registerUser).all(self.notImplemented);
   }
 
   getAllAccount(req, res, next) {
@@ -21,6 +21,23 @@ class AccountController extends BaseController {
       .catch(next);
   }
 
+  createAccount(req, res, next) {
+    UsersService.createAccount(req.body)
+      .then((result) => res.status(200).json(result))
+      .catch(next);
+  }
+
+  getAllUser(req, res, next) {
+    UsersService.fetchUsers()
+      .then((result) => res.status(200).json(result))
+      .catch(next);
+  }
+
+  registerUser(req, res, next) {
+    UsersService.registerUser(req.body)
+      .then((result) => res.status(200).json(result))
+      .catch(next);
+  }
 }
 
 module.exports = new AccountController();
