@@ -11,8 +11,9 @@ class AccountController extends BaseController {
   }
 
   registerRoutes() {
-    self.router.route('/api/account').get(self.getAllAccount).post(self.createAccount).all(self.notImplemented);
     self.router.route('/api/user').get(self.getAllUser).post(self.registerUser).all(self.notImplemented);
+    self.router.route('/api/account').get(self.getAllAccount).post(self.createAccount).all(self.notImplemented);
+    self.router.route('/api/account/verify').post(self.verifyAccount).all(self.notImplemented);
   }
 
   getAllAccount(req, res, next) {
@@ -23,6 +24,12 @@ class AccountController extends BaseController {
 
   createAccount(req, res, next) {
     UsersService.createAccount(req.body)
+      .then((result) => res.status(200).json(result))
+      .catch(next);
+  }
+
+  verifyAccount(req, res, next) {
+    UsersService.verifyAccount(req.body.userId, req.body.approval)
       .then((result) => res.status(200).json(result))
       .catch(next);
   }

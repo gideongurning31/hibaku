@@ -49,10 +49,24 @@ class UsersService {
           pass: bcrypt.hashSync(payload.pass, bcrypt.genSaltSync(saltRounds)),
           displayName: info.lastName ? `${info.firstName} ${info.lastName}` : info.firstName,
           roleId: parseInt(user.accountType),
-          verified: true,
+          verified: false,
         });
       })
       .then(() => UsersInfoModel.update(user, { where: { nik: payload.nik } }));
+  }
+
+  verifyAccount(userId, approval) {
+    if (!approval) return this.deleteAccount(userId);
+    return AccountsModel.findOne({ where: { userId } }).then((user) => {
+      if (!user) throw new BadRequestError(`Akun ID "${userId}" belum terdaftar.`);
+      user = user.dataValues;
+      user.verified = true;
+      return AccountsModel.update(user, { where: { userId } });
+    });
+  }
+
+  deleteAccount(userId) {
+    return AccountsModel.destroy({ where: { userId } });
   }
 }
 
