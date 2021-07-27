@@ -8,7 +8,7 @@ import { RegistrasiService } from '../registrasi.service';
 import { LoginPayload } from 'src/app/utils/service/auth.service';
 
 @Component({
-  selector: 'hibahku-registrasi-akun',
+  selector: 'hibaku-registrasi-akun',
   templateUrl: './registrasi-akun.component.html',
   styleUrls: ['../../login/login.component.scss', './registrasi-akun.component.scss'],
   providers: [RegistrasiService],
@@ -40,7 +40,7 @@ export class RegistrasiAkunComponent extends BaseFormComponent implements OnInit
     const subscription: Subscription = this.registerService
       .registerAccount(this.form.value)
       .subscribe(() => {
-        this.okResponse(subscription, `Registrasi berhasil, akun HIBAHKU Anda terdaftar dengan User ID: "${account}"`);
+        this.okResponse(subscription, `Registrasi berhasil, akun HIBAKU Anda terdaftar dengan User ID: "${account}"`);
         this.successRegister.emit({ username: this.form.value.userId, password: this.form.value.pass });
         this.close();
       }, (err) => this.onErrorResponse(subscription, err));

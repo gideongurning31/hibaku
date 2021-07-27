@@ -9,7 +9,7 @@ import { RegistrasiUser } from 'src/app/registrasi/Registrasi.model';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'hibahku-reg-penerima',
+  selector: 'hibaku-reg-penerima',
   templateUrl: './reg-penerima.component.html',
   styleUrls: ['./reg-penerima.component.scss'],
   providers: [RegistrasiService],

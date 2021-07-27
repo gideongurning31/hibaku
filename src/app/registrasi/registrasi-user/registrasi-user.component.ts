@@ -9,7 +9,7 @@ import { RegistrasiUser } from '../Registrasi.model';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'hibahku-registrasi-user',
+  selector: 'hibaku-registrasi-user',
   templateUrl: './registrasi-user.component.html',
   styleUrls: ['../../login/login.component.scss', './registrasi-user.component.scss'],
   providers: [RegistrasiService],
@@ -57,7 +57,7 @@ export class RegistrasiUserComponent extends BaseFormComponent implements OnInit
         accountType: AccountType[form.accountType],
       }).subscribe((resp: RegistrasiUser) => {
         this.close();
-        this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAHKU dengan NIK: ${resp.nik}`);
+        this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAKU dengan NIK: ${resp.nik}`);
       }, (err) => this.onErrorResponse(subscription, err));
   }
 
