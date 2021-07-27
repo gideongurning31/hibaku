@@ -1,0 +1,27 @@
+<div class="alert-message">
+  <h5 style="text-align: center;"><strong>Apakah Anda yakin akan memberi verifikasi akun ini?</strong></h5>
+  <hr>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+      <p><strong>User ID:</strong></p>
+      <p><strong>Jenis Akun:</strong></p>
+      <p><strong>NIK:</strong></p>
+      <p><strong>Nama:</strong></p>
+      <p><strong>Alamat:</strong></p>
+    </div>
+    <div class="col-md-5">
+      <p>{{ user.userId }}</p>
+      <p>{{ user.accountType === '2' ? 'PRODUSEN' : 'PENERIMA HIBAH' }}</p>
+      <p>{{ user.nik }}</p>
+      <p>{{ user.firstName.concat(' ').concat(user.lastName) }}</p>
+      <p>{{ user | fullAddress }}</p>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <hr>
+  <div class="button-container">
+    <button type="button" class="btn btn-success" (click)="confirm()">VERIFIKASI</button>
+    <button type="button" class="btn btn-danger" (click)="close()">BATAL</button>
+  </div>
+</div>

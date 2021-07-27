@@ -14,9 +14,10 @@ import { TransaksiComponent } from './pages/transaksi.component';
 import { KomoditasComponent } from './pages/komoditas.component';
 import { RegProdusenComponent } from './pages/reg-produsen.component';
 import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
+import { VerifyConfirmComponent } from './pages/reg-penerima/verify-confirm/verify-confirm.component';
 
 @NgModule({
-  declarations: [DashboardComponent, HomeComponent, TransaksiComponent, KomoditasComponent, RegProdusenComponent, RegPenerimaComponent],
+  declarations: [DashboardComponent, HomeComponent, TransaksiComponent, KomoditasComponent, RegProdusenComponent, RegPenerimaComponent, VerifyConfirmComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSidenavModule, MatToolbarModule, MatButtonModule, MatDividerModule, MatTooltipModule, MenuRoutingModule, UtilsModule],
   providers: [],
 })

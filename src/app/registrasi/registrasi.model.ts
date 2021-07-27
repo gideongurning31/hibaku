@@ -1,5 +1,6 @@
 export interface RegistrasiUser {
   nik: string;
+  userId?: string;
   firstName: string;
   lastName?: string;
   birthPlace: string;

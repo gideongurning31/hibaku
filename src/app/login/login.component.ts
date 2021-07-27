@@ -33,7 +33,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     });
   }
 
-  submitLogin() {
+  submitLogin(emitter?: Subscription) {
+    if (emitter) emitter.unsubscribe();
     this.setSpinner(true);
     const subscription: Subscription = this.authService
       .login(this.loginForm.value)
@@ -51,12 +52,12 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       this.matDialog.open(RegistrasiUserComponent);
     } else if (RegType[type] === RegType.ACCOUNT) {
       const dialogRef = this.matDialog.open(RegistrasiAkunComponent);
-      dialogRef.componentInstance.successRegister.subscribe((credentials: LoginPayload) => {
-        console.info(credentials);
-        this.loginForm.controls.username.setValue(credentials.username);
-        this.loginForm.controls.password.setValue(credentials.password);
-        this.submitLogin();
-      });
+      const subs: Subscription = dialogRef.componentInstance.successRegister
+        .subscribe((credentials: LoginPayload) => {
+          this.loginForm.controls.username.setValue(credentials.username);
+          this.loginForm.controls.password.setValue(credentials.password);
+          this.submitLogin(subs);
+        });
     }
   }
 }

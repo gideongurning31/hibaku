@@ -1,0 +1,15 @@
+.alert-message {
+  min-width: 40vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  min-width: 150px;
+  padding: 5px 20px;
+}

@@ -14,6 +14,10 @@ export class RegistrasiService {
     return this.http.post('/account', user);
   }
 
+  verifyAccount(userId: string) {
+    return this.http.post('/account/verify', { userId, approval: true });
+  }
+
   fetchDataTable() {
     return this.http.get('/user');
   }
