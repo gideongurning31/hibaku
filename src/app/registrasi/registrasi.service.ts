@@ -9,4 +9,8 @@ export class RegistrasiService {
   registerUser(user: RegistrasiUser) {
     return this.http.post('/user', user);
   }
+
+  fetchDataTable() {
+    return this.http.get('/user');
+  }
 }

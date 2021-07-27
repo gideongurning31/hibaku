@@ -11,13 +11,14 @@ import { SpinnerCloakService } from './spinner-cloak/spinner-cloak.service';
 export class BaseFormComponent {
   constructor(private dialog: MatDialog, private spinner: SpinnerCloakService) {}
 
-  successSubmit: EventEmitter<boolean> = new EventEmitter();
+  successSubmit: EventEmitter<void> = new EventEmitter();
   failedSubmit: EventEmitter<string> = new EventEmitter();
 
-  okResponse(subscription: Subscription) {
+  okResponse(subscription: Subscription, message?: string) {
     subscription.unsubscribe();
     this.spinner.setSpinner(false);
-    this.successSubmit.emit(true);
+    this.successSubmit.emit();
+    if (message) this.alertDialog(message);
   }
 
   onErrorResponse(subscription: Subscription, e: any) {

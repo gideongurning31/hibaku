@@ -11,12 +11,13 @@ import { BaseFormComponent } from './component/base-form.component';
 import { NotFoundComponent } from './component/not-found.component';
 import { AlertDialogComponent } from './component/alert-dialog.component';
 import { SpinnerCloakComponent } from './component/spinner-cloak/spinner-cloak.component';
+import { FullAddressPipe } from './pipe/full-address.pipe';
 
 @NgModule({
-  declarations: [BaseFormComponent, NotFoundComponent, AlertDialogComponent, SpinnerCloakComponent],
+  declarations: [BaseFormComponent, NotFoundComponent, AlertDialogComponent, SpinnerCloakComponent, FullAddressPipe],
   entryComponents: [],
   imports: [CommonModule, HttpClientModule, MatDialogModule, MatProgressSpinnerModule],
   providers: [RouteGuard, LoginGuard, HttpUtilService, AuthService, SpinnerCloakService],
-  exports: [BaseFormComponent, SpinnerCloakComponent],
+  exports: [BaseFormComponent, SpinnerCloakComponent, FullAddressPipe],
 })
 export class UtilsModule {}

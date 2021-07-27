@@ -1,3 +1,45 @@
-<div class="coming-soon">
-  <h1>REGISTRASI PENERIMA HIBAHKU</h1>
+<div class="container" style="margin-top: 25px;">
+  <div class="row" *ngIf="dataTable && dataTable.length > 0; else noData">
+    <table class="table table-bordered table-hover">
+      <thead><tr><th *ngFor="let header of tableHeaders" scope="col">{{ header }}</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let data of dataTable; let i = index">
+          <td><strong>{{ 0 + i + 1 }}</strong></td>
+          <td>
+            {{ data.nik }}
+            <i class="fa"
+              matTooltipPosition="after"
+              matTooltip="{{ data.userId ? 'User sudah registerasi akun' : 'User belum registerasi akun' }}"
+              [ngClass]="data.userId ? 'fa-check green' : 'fa-times red'">
+            </i>
+          </td>
+          <td>{{ data.firstName + ' ' + data.lastName }}</td>
+          <td>{{ data.birthDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ data.birthPlace }}</td>
+          <td>{{ data | fullAddress }}</td>
+          <td>
+            <button type="button"
+              class="btn btn-warning btn-table"
+              matTooltipPosition="below"
+              matTooltip="Verifikasi Akun"
+              (click)="verifyUser(data)"
+              [disabled]="!data.userId">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noData>
+    <p class="no-data">No data to display.</p>
+  </ng-template>
+  <div class="row btn-container">
+    <button type="button"
+      class="btn btn-success"
+      [ngClass]="dataTable && dataTable.length > 0 ? 'btn-right' : 'btn-center'"
+      (click)="registerUser()">
+      <i class="fa fa-plus"></i>&nbsp;Registrasi Baru
+    </button>
+  </div>
 </div>
