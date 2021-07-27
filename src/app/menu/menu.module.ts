@@ -8,11 +8,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MenuRoutingModule } from './menu-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './pages/home.component';
+import { TransaksiComponent } from './pages/transaksi.component';
+import { KomoditasComponent } from './pages/komoditas.component';
 import { RegProdusenComponent } from './pages/reg-produsen.component';
-import { RegPenerimaComponent } from './pages/reg-penerima.component';
+import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
 
 @NgModule({
-  declarations: [DashboardComponent, HomeComponent, RegProdusenComponent, RegPenerimaComponent],
+  declarations: [DashboardComponent, HomeComponent, TransaksiComponent, KomoditasComponent, RegProdusenComponent, RegPenerimaComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSidenavModule, MatToolbarModule, MatButtonModule, MatDividerModule, MenuRoutingModule],
   providers: [],
 })
