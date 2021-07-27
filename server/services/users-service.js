@@ -5,7 +5,7 @@ const RolesModel = Model.Roles;
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const saltRounds = parseInt(process.env.BCRYPT_SALT);
-const BadRequestError = require('../errors/bad-request-error');
+const ApplicationError = require('../core/application-error');
 
 class UsersService {
   constructor() {}
@@ -32,7 +32,7 @@ class UsersService {
     if (user.userId) delete user.userId;
     user.birthDate = new Date(moment(user.birthDate, 'YYYYMMDD'));
     return UsersInfoModel.findOne({ where: { nik: user.nik } }).then((result) => {
-      if (result) throw new BadRequestError(`NIK ${user.nik} sudah terdaftar.`);
+      if (result) throw new ApplicationError('NIK sudah terdaftar, silakan registerasi akun.');
       return UsersInfoModel.create(user);
     });
   }
@@ -41,7 +41,7 @@ class UsersService {
     let user;
     return UsersInfoModel.findOne({ where: { nik: payload.nik } })
       .then((info) => {
-        if (!info) throw new BadRequestError(`NIK ${payload.nik} belum terdaftar.`);
+        if (!info) throw new ApplicationError(`NIK "${payload.nik}" belum terdaftar, silakan lakukan registerasi terlebih dahulu.`);
         user = info.dataValues;
         user.userId = payload.userId;
         return AccountsModel.create({
@@ -58,7 +58,7 @@ class UsersService {
   verifyAccount(userId, approval) {
     if (!approval) return this.deleteAccount(userId);
     return AccountsModel.findOne({ where: { userId } }).then((user) => {
-      if (!user) throw new BadRequestError(`Akun ID "${userId}" belum terdaftar.`);
+      if (!user) throw new ApplicationError(`Akun ID "${userId}" tidak ditemukan.`);
       user = user.dataValues;
       user.verified = true;
       return AccountsModel.update(user, { where: { userId } });
