@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { BaseFormComponent } from '../utils/component/base-form.component';
 import { RegistrasiService } from './registrasi.service';
 import { SpinnerCloakService } from '../utils/component/spinner-cloak/spinner-cloak.service';
@@ -43,7 +44,7 @@ export class RegistrasiComponent extends BaseFormComponent implements OnInit {
   submit() {
     const form = this.registerForm.value;
     this.setSpinner(true);
-    return this.registerService
+    const subscription: Subscription = this.registerService
       .registerUser({
         nik: form.nik,
         firstName: form.firstName,
@@ -54,15 +55,11 @@ export class RegistrasiComponent extends BaseFormComponent implements OnInit {
         address: form.address1.concat(` Desa/Kelurahan ${form.address2}`).concat(` Kecamatan ${form.address3}`),
         zipCode: form.zipCode,
         accountType: AccountType[form.accountType],
-      })
-      .subscribe((resp: RegistrasiUser) => {
-        this.setSpinner(false);
+      }).subscribe((resp: RegistrasiUser) => {
         this.close();
+        this.okResponse(subscription);
         this.alertDialog(`NIK ${resp.nik} berhasil didaftarkan.`);
-      }, (err) => {
-        this.setSpinner(false);
-        this.alertDialog('Pendaftaran gagal.');
-      });
+      }, (err) => this.onErrorResponse(subscription, err));
   }
 
   close() {

@@ -7,6 +7,6 @@ export class RegistrasiService {
   constructor(private http: HttpUtilService) {}
 
   registerUser(user: RegistrasiUser) {
-    return this.http.post('http://localhost:3000/api/user', user);
+    return this.http.post('/user', user);
   }
 }

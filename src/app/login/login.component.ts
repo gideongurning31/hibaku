@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { BaseFormComponent } from '../utils/component/base-form.component';
 import { RegistrasiComponent } from '../registrasi/registrasi.component';
 import { AuthService } from '../utils/service/auth.service';
@@ -34,17 +35,13 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   submitLogin() {
     this.setSpinner(true);
     const payload = this.loginForm.value;
-    return this.authService.login(payload.user, payload.pass)
+    const subscription: Subscription = this.authService.login(payload.user, payload.pass)
       .subscribe((token: string) => {
         this.authService.storeSessionToken(token);
         this.router.navigate(['/']);
-        this.setSpinner(false);
+        this.okResponse(subscription);
         this.snackBar.open('Login berhasil.', 'x', { duration: 2500, horizontalPosition: 'end', verticalPosition: 'bottom' });
-      }, (err) => {
-        console.error(err);
-        this.setSpinner(false);
-        this.alertDialog('Login gagal.');
-      });
+      }, (err) => this.onErrorResponse(subscription, err));
   }
 
   register() {

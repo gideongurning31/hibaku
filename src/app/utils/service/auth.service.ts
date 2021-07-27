@@ -10,8 +10,7 @@ export class AuthService {
   constructor(private router: Router, private http: HttpUtilService) {}
 
   login(username: string, password: string) {
-    const api = 'http://localhost:3000/api/login';
-    return this.http.post(api, { username, password });
+    return this.http.post('/login', { username, password });
   }
 
   storeSessionToken(token: string) {
