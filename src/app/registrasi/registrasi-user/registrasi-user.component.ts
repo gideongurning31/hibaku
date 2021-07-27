@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
@@ -42,8 +42,8 @@ export class RegistrasiUserComponent extends BaseFormComponent implements OnInit
   }
 
   submit() {
-    const form = this.registerForm.value;
     this.setSpinner(true);
+    const form = this.registerForm.value;
     const subscription: Subscription = this.registerService
       .registerUser({
         nik: form.nik,

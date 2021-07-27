@@ -9,3 +9,9 @@ export interface RegistrasiUser {
   zipCode: string;
   accountType: string;
 }
+
+export interface RegistrasiAkun {
+  nik: string;
+  userId: string;
+  pass: string;
+}

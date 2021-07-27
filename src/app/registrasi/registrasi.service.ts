@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpUtilService } from '../utils/service/http-util.service';
-import { RegistrasiUser } from './Registrasi.model';
+import { RegistrasiAkun, RegistrasiUser } from './Registrasi.model';
 
 @Injectable()
 export class RegistrasiService {
@@ -8,6 +8,10 @@ export class RegistrasiService {
 
   registerUser(user: RegistrasiUser) {
     return this.http.post('/user', user);
+  }
+
+  registerAccount(user: RegistrasiAkun) {
+    return this.http.post('/account', user);
   }
 
   fetchDataTable() {
