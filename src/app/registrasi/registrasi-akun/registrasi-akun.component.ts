@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
 import { RegistrasiService } from '../registrasi.service';
-import { RegistrasiAkun } from '../Registrasi.model';
+import { LoginPayload } from 'src/app/utils/service/auth.service';
 
 @Component({
   selector: 'hibahku-registrasi-akun',
@@ -15,6 +15,7 @@ import { RegistrasiAkun } from '../Registrasi.model';
 })
 export class RegistrasiAkunComponent extends BaseFormComponent implements OnInit {
   form: FormGroup;
+  successRegister: EventEmitter<LoginPayload> = new EventEmitter();
 
   constructor(public dialogRef: MatDialogRef<RegistrasiAkunComponent>, private registerService: RegistrasiService, dialog: MatDialog, spinner: SpinnerCloakService) {
     super(dialog, spinner);
@@ -38,11 +39,11 @@ export class RegistrasiAkunComponent extends BaseFormComponent implements OnInit
     const account = this.form.value.userId;
     const subscription: Subscription = this.registerService
       .registerAccount(this.form.value)
-      .subscribe((resp: RegistrasiAkun) => {
-        console.log(resp);
+      .subscribe(() => {
+        this.okResponse(subscription, `Registrasi berhasil, akun HIBAHKU Anda terdaftar dengan User ID: "${account}"`);
+        this.successRegister.emit({ username: this.form.value.userId, password: this.form.value.pass });
         this.close();
-        this.okResponse(subscription, `Registrasi user berhasil, silakan login ke akun HIBAHKU Anda dengan User ID: ${account}`);
-      }, err => this.onErrorResponse(subscription, err));
+      }, (err) => this.onErrorResponse(subscription, err));
   }
 
   close() {

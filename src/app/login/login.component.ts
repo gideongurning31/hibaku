@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { BaseFormComponent } from '../utils/component/base-form.component';
 import { RegistrasiUserComponent } from '../registrasi/registrasi-user/registrasi-user.component';
 import { RegistrasiAkunComponent } from '../registrasi/registrasi-akun/registrasi-akun.component';
-import { AuthService } from '../utils/service/auth.service';
+import { AuthService, LoginPayload } from '../utils/service/auth.service';
 import { SpinnerCloakService } from '../utils/component/spinner-cloak/spinner-cloak.service';
 
 @Component({
@@ -28,15 +28,15 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = new FormGroup({
-      user: new FormControl(null, Validators.required),
-      pass: new FormControl(null, Validators.required),
+      username: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
     });
   }
 
   submitLogin() {
     this.setSpinner(true);
-    const payload = this.loginForm.value;
-    const subscription: Subscription = this.authService.login(payload.user, payload.pass)
+    const subscription: Subscription = this.authService
+      .login(this.loginForm.value)
       .subscribe((token: string) => {
         this.authService.storeSessionToken(token);
         this.router.navigate(['/']);
@@ -46,10 +46,17 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   }
 
   register(type: string) {
+    this.loginForm.reset();
     if (RegType[type] === RegType.USER) {
       this.matDialog.open(RegistrasiUserComponent);
     } else if (RegType[type] === RegType.ACCOUNT) {
-      this.matDialog.open(RegistrasiAkunComponent);
+      const dialogRef = this.matDialog.open(RegistrasiAkunComponent);
+      dialogRef.componentInstance.successRegister.subscribe((credentials: LoginPayload) => {
+        console.info(credentials);
+        this.loginForm.controls.username.setValue(credentials.username);
+        this.loginForm.controls.password.setValue(credentials.password);
+        this.submitLogin();
+      });
     }
   }
 }

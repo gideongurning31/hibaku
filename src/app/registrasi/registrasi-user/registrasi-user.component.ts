@@ -57,7 +57,7 @@ export class RegistrasiUserComponent extends BaseFormComponent implements OnInit
         accountType: AccountType[form.accountType],
       }).subscribe((resp: RegistrasiUser) => {
         this.close();
-        this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAHKU dengan NIK:${resp.nik}`);
+        this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAHKU dengan NIK: ${resp.nik}`);
       }, (err) => this.onErrorResponse(subscription, err));
   }
 

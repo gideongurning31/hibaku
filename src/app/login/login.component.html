@@ -11,10 +11,10 @@
           <input type="text"
             class="form-control"
             id="inputUserId"
-            formControlName="user"
+            formControlName="username"
             placeholder="User ID"
-            [ngClass]="{ 'field-error': loginForm.controls['user'].errors && loginForm.controls['user'].touched }">
-            <span *ngIf="loginForm.controls['user'].errors && loginForm.controls['user'].touched" class="form-error-message">
+            [ngClass]="{ 'field-error': loginForm.controls['username'].errors && loginForm.controls['username'].touched }">
+            <span *ngIf="loginForm.controls['username'].errors && loginForm.controls['username'].dirty" class="form-error-message">
               User ID wajib diisi.
             </span>
         </div>
@@ -22,10 +22,10 @@
           <input type="password"
             class="form-control"
             id="inputPass"
-            formControlName="pass"
+            formControlName="password"
             placeholder="Password"
-            [ngClass]="{ 'field-error': loginForm.controls['pass'].errors && loginForm.controls['pass'].touched }">
-            <span *ngIf="loginForm.controls['pass'].errors && loginForm.controls['pass'].touched" class="form-error-message">
+            [ngClass]="{ 'field-error': loginForm.controls['password'].errors && loginForm.controls['password'].touched }">
+            <span *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty" class="form-error-message">
               Password wajib diisi.
             </span>
         </div>
