@@ -5,7 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from '../utils/component/base-form.component';
-import { RegistrasiComponent } from '../registrasi/registrasi.component';
+import { RegistrasiUserComponent } from '../registrasi/registrasi-user/registrasi-user.component';
+import { RegistrasiAkunComponent } from '../registrasi/registrasi-akun/registrasi-akun.component';
 import { AuthService } from '../utils/service/auth.service';
 import { SpinnerCloakService } from '../utils/component/spinner-cloak/spinner-cloak.service';
 
@@ -41,10 +42,19 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
         this.router.navigate(['/']);
         this.okResponse(subscription);
         this.snackBar.open('Login berhasil.', 'x', { duration: 2500, horizontalPosition: 'end', verticalPosition: 'bottom' });
-      }, (err) => this.onErrorResponse(subscription, err));
+      }, err => this.onErrorResponse(subscription, err));
   }
 
-  register() {
-    this.matDialog.open(RegistrasiComponent);
+  register(type: string) {
+    if (RegType[type] === RegType.USER) {
+      this.matDialog.open(RegistrasiUserComponent);
+    } else if (RegType[type] === RegType.ACCOUNT) {
+      this.matDialog.open(RegistrasiAkunComponent);
+    }
   }
+}
+
+enum RegType {
+  USER = 'USER',
+  ACCOUNT = 'ACCOUNT',
 }

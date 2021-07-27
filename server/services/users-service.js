@@ -32,7 +32,7 @@ class UsersService {
     if (user.userId) delete user.userId;
     user.birthDate = new Date(moment(user.birthDate, 'YYYYMMDD'));
     return UsersInfoModel.findOne({ where: { nik: user.nik } }).then((result) => {
-      if (result) throw new ApplicationError('NIK sudah terdaftar, silakan registerasi akun.');
+      if (result) throw new ApplicationError('NIK sudah terdaftar, silakan registrasi akun.');
       return UsersInfoModel.create(user);
     });
   }
@@ -41,7 +41,7 @@ class UsersService {
     let user;
     return UsersInfoModel.findOne({ where: { nik: payload.nik } })
       .then((info) => {
-        if (!info) throw new ApplicationError(`NIK "${payload.nik}" belum terdaftar, silakan lakukan registerasi terlebih dahulu.`);
+        if (!info) throw new ApplicationError(`NIK "${payload.nik}" belum terdaftar, silakan lakukan registrasi terlebih dahulu.`);
         user = info.dataValues;
         user.userId = payload.userId;
         return AccountsModel.create({

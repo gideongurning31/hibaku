@@ -32,7 +32,10 @@
         <small *ngIf="false" id="loginError" class="form-text">User ID dan/atau password salah</small>
         <button type="submit" class="btn btn-block btn-login" [disabled]="!loginForm.valid">LOGIN</button>
         <hr>
-        <button type="button" class="btn btn-block btn-warning" (click)="register()">REGISTRASI PRODUSEN / PENERIMA</button> 
+        <div class="reg-button-container">
+          <button type="button" class="btn btn-register btn-info" (click)="register('USER')">REGISTRASI KTP</button>
+          <button type="button" class="btn btn-register btn-success" (click)="register('ACCOUNT')">REGISTRASI AKUN</button>
+        </div>
       </form>
     </div>
   </div>
