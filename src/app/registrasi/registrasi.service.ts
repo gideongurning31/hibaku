@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpUtilService } from '../utils/service/http-util.service';
-import { RegistrasiUser } from './Registrasi.model';
+import { RegistrasiAkun, RegistrasiUser } from './Registrasi.model';
 
 @Injectable()
 export class RegistrasiService {
   constructor(private http: HttpUtilService) {}
 
   registerUser(user: RegistrasiUser) {
-    return this.http.post('http://localhost:3000/api/user', user);
+    return this.http.post('/user', user);
+  }
+
+  registerAccount(user: RegistrasiAkun) {
+    return this.http.post('/account', user);
+  }
+
+  verifyAccount(userId: string) {
+    return this.http.post('/account/verify', { userId, approval: true });
+  }
+
+  fetchDataTable() {
+    return this.http.get('/user');
   }
 }

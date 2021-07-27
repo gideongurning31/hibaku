@@ -2,7 +2,7 @@ let self;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserService = new (require('../services/users-service'))();
-const BadCredentialError = require('../errors/bad-credentials-error');
+const ApplicationError = require('../core/application-error');
 
 class AuthenticationService {
   constructor() {
@@ -18,7 +18,7 @@ class AuthenticationService {
   login(userId, pass) {
     return UserService.findByAccountName(userId).then((user) => {
       if (!user || !bcrypt.compareSync(pass, user.pass)) {
-        throw new BadCredentialError('Kombinasi username dan/atau password salah.');
+        throw new ApplicationError('Kombinasi username / password salah.');
       }
       delete user.dataValues.pass;
       return this.generateJwt(user.dataValues);

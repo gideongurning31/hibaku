@@ -11,10 +11,10 @@
           <input type="text"
             class="form-control"
             id="inputUserId"
-            formControlName="user"
+            formControlName="username"
             placeholder="User ID"
-            [ngClass]="{ 'field-error': loginForm.controls['user'].errors && loginForm.controls['user'].touched }">
-            <span *ngIf="loginForm.controls['user'].errors && loginForm.controls['user'].touched" class="form-error-message">
+            [ngClass]="{ 'field-error': loginForm.controls['username'].errors && loginForm.controls['username'].touched }">
+            <span *ngIf="loginForm.controls['username'].errors && loginForm.controls['username'].dirty" class="form-error-message">
               User ID wajib diisi.
             </span>
         </div>
@@ -22,17 +22,20 @@
           <input type="password"
             class="form-control"
             id="inputPass"
-            formControlName="pass"
+            formControlName="password"
             placeholder="Password"
-            [ngClass]="{ 'field-error': loginForm.controls['pass'].errors && loginForm.controls['pass'].touched }">
-            <span *ngIf="loginForm.controls['pass'].errors && loginForm.controls['pass'].touched" class="form-error-message">
+            [ngClass]="{ 'field-error': loginForm.controls['password'].errors && loginForm.controls['password'].touched }">
+            <span *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty" class="form-error-message">
               Password wajib diisi.
             </span>
         </div>
         <small *ngIf="false" id="loginError" class="form-text">User ID dan/atau password salah</small>
         <button type="submit" class="btn btn-block btn-login" [disabled]="!loginForm.valid">LOGIN</button>
         <hr>
-        <button type="button" class="btn btn-block btn-warning" (click)="register()">REGISTRASI PRODUSEN / PENERIMA</button> 
+        <div class="reg-button-container">
+          <button type="button" class="btn btn-register btn-info" (click)="register('USER')">REGISTRASI KTP</button>
+          <button type="button" class="btn btn-register btn-success" (click)="register('ACCOUNT')">REGISTRASI AKUN</button>
+        </div>
       </form>
     </div>
   </div>

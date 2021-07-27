@@ -1,7 +1,9 @@
 'use strict';
 let self;
 const sequelize = require('sequelize');
-const ApplicationError = require('../errors/application-error');
+const SqlValidationError = sequelize.ValidationError;
+const SqlDatabaseError = sequelize.DatabaseError;
+const ApplicationError = require('../core/application-error');
 
 class HttpInterceptor {
   constructor() {
@@ -11,15 +13,17 @@ class HttpInterceptor {
   errorHandler(err, req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    if (err instanceof sequelize.ValidationError) {
+    if (err instanceof SqlValidationError) {
       let messages = [];
       for (let i = 0; i < err.errors.length; i++) messages.push(err.errors[i].message);
       res.status(400).json({ messages: messages });
+    } else if (err instanceof SqlDatabaseError) {
+      res.status(400).json({ messages: err.parent.sqlMessage });
     } else if (err instanceof ApplicationError) {
-      res.status(err.status).json({ message: err.message });
+      res.status(200).json({ exception: true, message: err.message });
     } else {
-      console.error(err);
-      res.status(500).json({ message: err.message });
+      console.error('===[', err, ']===');
+      res.status(500).json({ message: 'Server experienced an internal error.' });
     }
   }
 }

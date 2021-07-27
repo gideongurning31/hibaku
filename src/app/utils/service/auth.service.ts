@@ -9,9 +9,8 @@ import { TokenPayload } from '../model/TokenPayload.model';
 export class AuthService {
   constructor(private router: Router, private http: HttpUtilService) {}
 
-  login(username: string, password: string) {
-    const api = 'http://localhost:3000/api/login';
-    return this.http.post(api, { username, password });
+  login(payload: LoginPayload) {
+    return this.http.post('/login', payload);
   }
 
   storeSessionToken(token: string) {
@@ -31,4 +30,9 @@ export class AuthService {
     localStorage.clear();
     this.router.navigate(['login']);
   }
+}
+
+export interface LoginPayload {
+  username: string;
+  password: string;
 }

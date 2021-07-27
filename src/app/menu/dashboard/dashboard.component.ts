@@ -35,8 +35,10 @@ export class DashboardComponent implements OnInit {
   initMenu() {
     this.navMenu = [
       { name: 'Beranda', icon: 'fa-home', route: '' },
+      { name: 'Transaksi', icon: 'fa-handshake-o', route: 'transaksi' },
+      { name: 'Komoditas', icon: 'fa-shopping-basket', route: 'komoditas' },
       { name: 'Registrasi Produsen', icon: 'fa-cart-plus', route: 'registrasi-produsen' },
-      { name: 'Registrasi Penerima', icon: 'fa-shopping-basket', route: 'registrasi-penerima' },
+      { name: 'Registrasi Penerima', icon: 'fa-id-card-o', route: 'registrasi-penerima' },
     ];
   }
 

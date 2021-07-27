@@ -13,7 +13,7 @@ const start = () => {
     })
     .catch((err) => {
       console.error(`${process.env.APP_NAME} (${process.env.NODE_ENV}) failed to start.`);
-      console.error(error);
+      console.error(err);
       process.exit(-1);
     });
 };

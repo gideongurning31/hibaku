@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { BaseFormComponent } from '../utils/component/base-form.component';
-import { RegistrasiService } from './registrasi.service';
-import { SpinnerCloakService } from '../utils/component/spinner-cloak/spinner-cloak.service';
-import { RegistrasiUser } from './Registrasi.model';
+import { Subscription } from 'rxjs';
+import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
+import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
+import { RegistrasiService } from '../registrasi.service';
+import { RegistrasiUser } from '../Registrasi.model';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'hibahku-registrasi',
-  templateUrl: './registrasi.component.html',
-  styleUrls: ['../login/login.component.scss', './registrasi.component.scss'],
+  selector: 'hibahku-registrasi-user',
+  templateUrl: './registrasi-user.component.html',
+  styleUrls: ['../../login/login.component.scss', './registrasi-user.component.scss'],
   providers: [RegistrasiService],
 })
-export class RegistrasiComponent extends BaseFormComponent implements OnInit {
+export class RegistrasiUserComponent extends BaseFormComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<RegistrasiComponent>, private registerService: RegistrasiService, dialog: MatDialog, spinner: SpinnerCloakService) {
+  constructor(private dialogRef: MatDialogRef<RegistrasiUserComponent>, private registerService: RegistrasiService, dialog: MatDialog, spinner: SpinnerCloakService) {
     super(dialog, spinner);
   }
 
@@ -41,9 +42,9 @@ export class RegistrasiComponent extends BaseFormComponent implements OnInit {
   }
 
   submit() {
-    const form = this.registerForm.value;
     this.setSpinner(true);
-    return this.registerService
+    const form = this.registerForm.value;
+    const subscription: Subscription = this.registerService
       .registerUser({
         nik: form.nik,
         firstName: form.firstName,
@@ -54,15 +55,10 @@ export class RegistrasiComponent extends BaseFormComponent implements OnInit {
         address: form.address1.concat(` Desa/Kelurahan ${form.address2}`).concat(` Kecamatan ${form.address3}`),
         zipCode: form.zipCode,
         accountType: AccountType[form.accountType],
-      })
-      .subscribe((resp: RegistrasiUser) => {
-        this.setSpinner(false);
+      }).subscribe((resp: RegistrasiUser) => {
         this.close();
-        this.alertDialog(`NIK ${resp.nik} berhasil didaftarkan.`);
-      }, (err) => {
-        this.setSpinner(false);
-        this.alertDialog('Pendaftaran gagal.');
-      });
+        this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAHKU dengan NIK: ${resp.nik}`);
+      }, (err) => this.onErrorResponse(subscription, err));
   }
 
   close() {

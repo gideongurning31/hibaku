@@ -55,3 +55,12 @@ img.logo {
   color: var(--color2);
   background-color: var(--color1);
 }
+
+.btn-register {
+  min-width: 250px;
+}
+
+.reg-button-container {
+  display: flex;
+  justify-content: space-between;
+}

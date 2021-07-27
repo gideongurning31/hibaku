@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { BaseFormComponent } from '../utils/component/base-form.component';
-import { RegistrasiComponent } from '../registrasi/registrasi.component';
-import { AuthService } from '../utils/service/auth.service';
+import { RegistrasiUserComponent } from '../registrasi/registrasi-user/registrasi-user.component';
+import { RegistrasiAkunComponent } from '../registrasi/registrasi-akun/registrasi-akun.component';
+import { AuthService, LoginPayload } from '../utils/service/auth.service';
 import { SpinnerCloakService } from '../utils/component/spinner-cloak/spinner-cloak.service';
 
 @Component({
@@ -26,28 +28,41 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = new FormGroup({
-      user: new FormControl(null, Validators.required),
-      pass: new FormControl(null, Validators.required),
+      username: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
     });
   }
 
-  submitLogin() {
+  submitLogin(emitter?: Subscription) {
+    if (emitter) emitter.unsubscribe();
     this.setSpinner(true);
-    const payload = this.loginForm.value;
-    return this.authService.login(payload.user, payload.pass)
+    const subscription: Subscription = this.authService
+      .login(this.loginForm.value)
       .subscribe((token: string) => {
         this.authService.storeSessionToken(token);
         this.router.navigate(['/']);
-        this.setSpinner(false);
+        this.okResponse(subscription);
         this.snackBar.open('Login berhasil.', 'x', { duration: 2500, horizontalPosition: 'end', verticalPosition: 'bottom' });
-      }, (err) => {
-        console.error(err);
-        this.setSpinner(false);
-        this.alertDialog('Login gagal.');
-      });
+      }, err => this.onErrorResponse(subscription, err));
   }
 
-  register() {
-    this.matDialog.open(RegistrasiComponent);
+  register(type: string) {
+    this.loginForm.reset();
+    if (RegType[type] === RegType.USER) {
+      this.matDialog.open(RegistrasiUserComponent);
+    } else if (RegType[type] === RegType.ACCOUNT) {
+      const dialogRef = this.matDialog.open(RegistrasiAkunComponent);
+      const subs: Subscription = dialogRef.componentInstance.successRegister
+        .subscribe((credentials: LoginPayload) => {
+          this.loginForm.controls.username.setValue(credentials.username);
+          this.loginForm.controls.password.setValue(credentials.password);
+          this.submitLogin(subs);
+        });
+    }
   }
+}
+
+enum RegType {
+  USER = 'USER',
+  ACCOUNT = 'ACCOUNT',
 }

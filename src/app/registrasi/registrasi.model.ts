@@ -1,5 +1,6 @@
 export interface RegistrasiUser {
   nik: string;
+  userId?: string;
   firstName: string;
   lastName?: string;
   birthPlace: string;
@@ -8,4 +9,10 @@ export interface RegistrasiUser {
   address: string;
   zipCode: string;
   accountType: string;
+}
+
+export interface RegistrasiAkun {
+  nik: string;
+  userId: string;
+  pass: string;
 }
