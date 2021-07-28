@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './pages/home.component';
 import { RegProdusenComponent } from './pages/reg-produsen.component';
 import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
-import { KomoditasComponent } from './pages/komoditas.component';
+import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { TransaksiComponent } from './pages/transaksi.component';
 
 const routes: Routes = [
