@@ -1,10 +1,11 @@
-import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
+import { KomoditasFormComponent } from './komoditas-form/komoditas-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
 import { CommodityService, Commodity } from '../../service/commodity-service';
+import { ActionType } from 'src/app/utils/model/ActionType.enum';
 
 @Component({
   selector: 'hibaku-komoditas',
@@ -14,17 +15,12 @@ import { CommodityService, Commodity } from '../../service/commodity-service';
 export class KomoditasComponent extends BaseFormComponent implements OnInit {
   tableHeaders: Array<string> = [];
   dataTable: Array<Commodity> = [];
-  categories: Array<KeyValue<string, string>>;
-  constructor(private commodityService: CommodityService, dialog: MatDialog, spinner: SpinnerCloakService) {
+
+  constructor(private commodityService: CommodityService, private matDialog: MatDialog, dialog: MatDialog, spinner: SpinnerCloakService) {
     super(dialog, spinner);
   }
 
   ngOnInit() {
-    this.categories = [
-      { key: 'A', value: 'A' },
-      { key: 'B', value: 'B' },
-      { key: 'C', value: 'C' },
-    ];
     this.initDataTable();
   }
 
@@ -39,5 +35,8 @@ export class KomoditasComponent extends BaseFormComponent implements OnInit {
       }, err => this.onErrorResponse(subscription, err));
   }
 
-  create() {}
+  openForm(type: string = 'CREATE', commodity?: Commodity) {
+    const dialogRef = this.matDialog.open(KomoditasFormComponent, { data: { type: ActionType[type], commodity }});
+    const subscription: Subscription = dialogRef.componentInstance.successSubmit.subscribe(() => this.initDataTable(subscription));
+  }
 }

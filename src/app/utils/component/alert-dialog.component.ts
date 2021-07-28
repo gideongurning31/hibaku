@@ -1,4 +1,4 @@
-import { Component, Optional, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -25,5 +25,5 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     }`],
 })
 export class AlertDialogComponent {
-  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public message: Array<string>, public dialogRef: MatDialogRef<AlertDialogComponent>) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public message: Array<string>, public dialogRef: MatDialogRef<AlertDialogComponent>) {}
 }

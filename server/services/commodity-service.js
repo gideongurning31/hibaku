@@ -1,4 +1,5 @@
 let self;
+const uuid = require('uuid');
 const Model = require('../models/index');
 const CommodityModel = Model.Commodities;
 
@@ -12,7 +13,7 @@ class CommodityService {
   }
 
   create(payload) {
-    if (payload.id) delete payload.id;
+    payload.id = uuid.v4();
     return CommodityModel.create(payload);
   }
 

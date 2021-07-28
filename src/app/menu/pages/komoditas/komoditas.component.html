@@ -13,8 +13,17 @@
             <button type="button"
               class="btn btn-warning btn-table"
               matTooltipPosition="below"
-              matTooltip="Ubah Data">
+              matTooltip="Ubah Data"
+              (click)="openForm('UPDATE', data)">
               <i class="fa fa-pencil-square-o"></i>
+            </button>
+            &nbsp;&nbsp;
+            <button type="button"
+              class="btn btn-table btn-danger"
+              matTooltipPosition="below"
+              matTooltip="Hapus Data"
+              (click)="openForm('DELETE', data)">
+              <i class="fa fa-trash"></i>
             </button>
           </td>
         </tr>
@@ -25,7 +34,10 @@
     <p class="no-data">No data to display.</p>
   </ng-template>
   <div class="row btn-container">
-    <button type="button" class="btn btn-primary" [ngClass]="dataTable && dataTable.length > 0 ? 'btn-right' : 'btn-center'" (click)="create()">
+    <button type="button"
+      class="btn btn-primary"
+      (click)="openForm()"
+      [ngClass]="dataTable && dataTable.length > 0 ? 'btn-right' : 'btn-center'">
       <i class="fa fa-plus"></i>&nbsp;KOMODITAS
     </button>
   </div>

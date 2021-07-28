@@ -1,0 +1,19 @@
+.form-container {
+  min-height: 50vh;
+  min-width: 50vw;
+  padding: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+button.btn {
+  min-width: 300px;
+  padding: 10px;
+}
+
+button:disabled {
+  opacity: .3;
+}
