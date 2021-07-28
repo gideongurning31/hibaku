@@ -3,6 +3,9 @@
     <i class="fa" [ngClass]="sidenav.opened ? 'fa-times' : 'fa-bars'"></i>
     <span class="title">HIBAKU</span>
   </button>
+  <div class="active-menu" *ngIf="activeMenu">
+    {{ activeMenu }}
+  </div>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
@@ -12,7 +15,11 @@
         <h5>{{ profile.name }}</h5>
         <p class="profile-role">{{ profile.role }}</p>
         <ng-container *ngFor="let menu of navMenu">
-          <button mat-button class="menu-button" (click)="navigate(menu.route)">
+          <button mat-button
+            type="button"
+            class="menu-button"
+            (click)="navigate(menu)"
+            [ngClass]="{'current-menu': menu.name.toUpperCase() === activeMenu}">
             <i class="fa" ngClass="{{ menu.icon }}"></i>
             <span class="menu-name">{{ menu.name }}</span>
           </button>
