@@ -6,26 +6,37 @@
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <i class="gg gg-hibaku menu-logo"></i>
-    <h5>{{ profile.name }}</h5>
-    <p class="profile-role">{{ profile.role }}</p>
-    <mat-divider></mat-divider>
-    <ng-container *ngFor="let menu of navMenu">
-      <button mat-button class="menu-button" (click)="navigate(menu.route)">
-        <i class="fa" ngClass="{{ menu.icon }}"></i>
-        <span class="menu-name">{{ menu.name }}</span>
-      </button>
-    </ng-container>
-    <mat-divider></mat-divider>
-    <button mat-button class="menu-button" (click)="logout()">
-      <i class="fa fa-power-off"></i>
-      <span class="menu-name">LOG-OUT</span>
-    </button>
-
+    <div class="sidenav-container">
+      <div>
+        <i class="gg gg-hibaku menu-logo"></i>
+        <h5>{{ profile.name }}</h5>
+        <p class="profile-role">{{ profile.role }}</p>
+        <ng-container *ngFor="let menu of navMenu">
+          <button mat-button class="menu-button" (click)="navigate(menu.route)">
+            <i class="fa" ngClass="{{ menu.icon }}"></i>
+            <span class="menu-name">{{ menu.name }}</span>
+          </button>
+        </ng-container>
+      </div>
+      <div>
+        <button mat-button class="menu-button" (click)="logout()">
+          <i class="fa fa-power-off"></i>
+          <span class="menu-name">LOG-OUT</span>
+        </button>
+      </div>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      <router-outlet></router-outlet>
+      <ng-container *ngIf="navMenu.length > 0; else notVerified">
+        <router-outlet></router-outlet>
+      </ng-container>
+      <ng-template #notVerified>
+        <div class="not-verified">
+          <h1>AKUN BELUM AKTIF</h1>
+          <p>Silakan hubungi administrator HIBAKU untuk proses verifikasi akun.</p>
+        </div>
+      </ng-template>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

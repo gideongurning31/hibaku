@@ -12,8 +12,8 @@ import { AuthService } from 'src/app/utils/service/auth.service';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
+  navMenu: Array<Menu> = [];
   profile: UserProfile;
-  navMenu: Array<Menu>;
   showFiller: boolean;
 
   constructor(private router: Router, private authService: AuthService, private observer: BreakpointObserver) {}
@@ -33,13 +33,15 @@ export class DashboardComponent implements OnInit {
   }
 
   initMenu() {
-    this.navMenu = [
-      { name: 'Beranda', icon: 'fa-home', route: '' },
-      { name: 'Transaksi', icon: 'fa-handshake-o', route: 'transaksi' },
-      { name: 'Komoditas', icon: 'fa-shopping-basket', route: 'komoditas' },
-      { name: 'Registrasi Produsen', icon: 'fa-cart-plus', route: 'registrasi-produsen' },
-      { name: 'Registrasi Penerima', icon: 'fa-id-card-o', route: 'registrasi-penerima' },
-    ];
+    if (this.profile.role) {
+      this.navMenu = [
+        { name: 'Beranda', icon: 'fa-home', route: '' },
+        { name: 'Transaksi', icon: 'fa-handshake-o', route: 'transaksi' },
+        { name: 'Komoditas', icon: 'fa-shopping-basket', route: 'komoditas' },
+        { name: 'Registrasi Produsen', icon: 'fa-cart-plus', route: 'registrasi-produsen' },
+        { name: 'Registrasi Penerima', icon: 'fa-id-card-o', route: 'registrasi-penerima' },
+      ];
+    }
   }
 
   navigate(path: string) {

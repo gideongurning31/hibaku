@@ -17,9 +17,9 @@ export class AuthService {
     const payload: TokenPayload = jwt_decode(token);
     localStorage.clear();
     localStorage.setItem('sessionToken', token);
+    localStorage.setItem('userId', payload.userId);
+    localStorage.setItem('displayName', payload.displayName);
     if (payload.verified) {
-      localStorage.setItem('userId', payload.userId);
-      localStorage.setItem('displayName', payload.displayName);
       localStorage.setItem('roleId', payload.role.id);
       localStorage.setItem('roleName', payload.role.name);
       localStorage.setItem('expiredAt', moment(payload.exp * 1000).format('DDMMYY'));
