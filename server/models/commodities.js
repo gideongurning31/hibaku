@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       name: { type: DataTypes.STRING(100), unique: true, allowNull: false },
       type: { type: DataTypes.STRING(50), allowNull: false },
       unit: { type: DataTypes.STRING(10), allowNull: false },
+      price: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     },
     {
       tableName: 'commodities',

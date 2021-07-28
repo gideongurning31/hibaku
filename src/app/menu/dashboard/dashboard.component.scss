@@ -34,11 +34,24 @@ mat-sidenav {
   font-size: 100px;
 }
 
+.active-menu {
+  width: 100vw;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-family: "Montserrat", "Helvetica Neue", sans-serif;
+}
+
+.current-menu {
+  font-weight: bold;
+  color: var(--color1);
+  background-color: var(--color3);
+}
+
 .content {
   height: calc(100vh - 98px);
   border-radius: 10px;
   margin: 16px;
-  margin-left: 32px;
   padding: 20px;
   background: #FFF;
 }
@@ -66,8 +79,8 @@ mat-sidenav-container {
 .profile-role {
   margin-top: 2px;
   font-size: 0.7rem;
-  color: var(--color1);
-  background-color: var(--color4);
+  color: #FFF;
+  background-color: var(--color2);
 }
 
 .menu-name {

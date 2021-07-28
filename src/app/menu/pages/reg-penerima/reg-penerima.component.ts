@@ -29,7 +29,7 @@ export class RegPenerimaComponent extends BaseFormComponent implements OnInit {
   initDataTable(emitter?: Subscription) {
     if (emitter) emitter.unsubscribe();
     this.setSpinner(true);
-    this.tableHeaders = ['#', 'NIK', 'Nama', 'Tanggal Lahir', 'Tempat Lahir', 'Alamat', 'Tindakan'];
+    this.tableHeaders = ['#', 'NIK', 'Nama', 'Tanggal Lahir', 'Tempat Lahir', 'Alamat', ''];
     const subscription: Subscription = this.regService.fetchDataTable()
       .subscribe(resp => {
         this.dataTable = resp;

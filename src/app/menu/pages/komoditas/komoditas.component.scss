@@ -3,7 +3,7 @@
 .container-md,
 .container-sm,
 .container-xl {
-  max-width: 100vw;
+  max-width: 80vw;
 }
 
 .table>thead>tr>th,
@@ -24,16 +24,6 @@ thead {
 
 tbody {
   background-color: rgba($color: #fff, $alpha: .5);
-}
-
-i.red {
-  margin-left: 10px;
-  color: var(--colorErr);
-}
-
-i.green {
-  margin-left: 10px;
-  color: var(--color1);
 }
 
 .btn-table {

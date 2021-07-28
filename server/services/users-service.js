@@ -52,7 +52,7 @@ class UsersService {
         return AccountsModel.create({
           userId: payload.userId,
           pass: bcrypt.hashSync(payload.pass, bcrypt.genSaltSync(saltRounds)),
-          displayName: info.lastName ? `${info.firstName} ${info.lastName}` : info.firstName,
+          displayName: info.lastName ? `${info.firstName}${info.lastName}` : info.firstName,
           roleId: parseInt(user.accountType),
           verified: false,
         });
@@ -60,14 +60,11 @@ class UsersService {
       .then(() => UsersInfoModel.update(user, { where: { nik: payload.nik }}));
   }
 
-  verifyAccount(userId, approval) {
-    if (!approval) return this.deleteAccount(userId);
-    return AccountsModel.findOne({ where: { userId }}).then(user => {
-      if (!user) throw new ApplicationError(`Akun ID "${userId}" tidak ditemukan.`);
-      user = user.dataValues;
-      user.verified = true;
-      return AccountsModel.update(user, { where: { userId }});
-    });
+  async verifyAccount(userId, approval) {
+    const user = await AccountsModel.findOne({ where: { userId }});
+    if (!user) throw new ApplicationError(`Akun ID "${userId}" tidak ditemukan.`);
+    user.verified = approval;
+    return user.save({ fields: ['verified'] });
   }
 
   deleteAccount(userId) {

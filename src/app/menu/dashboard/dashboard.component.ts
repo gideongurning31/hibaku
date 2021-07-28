@@ -14,14 +14,14 @@ export class DashboardComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
   navMenu: Array<Menu> = [];
   profile: UserProfile;
-  showFiller: boolean;
+  activeMenu: string;
 
   constructor(private router: Router, private authService: AuthService, private observer: BreakpointObserver) {}
 
   ngOnInit(): void {
-    this.showFiller = false;
     this.initUserProfile();
     this.initMenu();
+    this.initActiveMenu();
   }
 
   initUserProfile() {
@@ -44,8 +44,17 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  navigate(path: string) {
-    this.router.navigate([path]);
+  initActiveMenu() {
+    this.navMenu.forEach((menu) => {
+      if (this.router.url === '/'.concat(menu.route)) {
+        this.activeMenu = menu.name.toUpperCase();
+      }
+    });
+  }
+
+  navigate(menu: Menu) {
+    this.activeMenu = menu.name.toUpperCase();
+    this.router.navigate([menu.route]);
     this.sidenav.close();
   }
 
