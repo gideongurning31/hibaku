@@ -17,17 +17,29 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="inputNik">NIK:</label>
-        <input type="text" formControlName="nik" class="form-control" id="inputNik">
+        <input type="text"
+          formControlName="nik"
+          class="form-control"
+          id="inputNik"
+          [value]="registerForm.get('nik').value | onlyNumeric | noWhitespace">
         <small class="form-text text-muted">*16 digit Nomor Induk KTP tanpa spasi dan/atau tanda "-"</small>
       </div>
       <div class="form-group col-md-4">
         <label for="inputFirstName">Nama Depan:</label>
-        <input type="text" formControlName="firstName" class="form-control" id="inputFirstName">
+        <input type="text"
+          formControlName="firstName"
+          class="form-control"
+          id="inputFirstName"
+          [value]="registerForm.get('firstName').value | noWhitespace">
         <small class="form-text text-muted">*Nama sesuai KTP</small>
       </div>
       <div class="form-group col-md-4">
         <label for="inputLastName">Nama Belakang:</label>
-        <input type="text" formControlName="lastName" class="form-control" id="inputLastName">
+        <input type="text"
+          formControlName="lastName"
+          class="form-control"
+          id="inputLastName"
+          [value]="registerForm.get('lastName').value | noWhitespace">
         <small class="form-text text-muted">*Kosongkan jika tidak ada</small>
       </div>
     </div>
@@ -61,7 +73,11 @@
       </div>
       <div class="form-group col-md-3">
         <label for="inputZip">Kode Pos:</label>
-        <input type="text" formControlName="zipCode" class="form-control" id="inputZip">
+        <input type="text"
+          formControlName="zipCode"
+          class="form-control"
+          id="inputZip"
+          [value]="registerForm.get('zipCode').value | onlyNumeric | noWhitespace">
       </div>
     </div>
     <hr>

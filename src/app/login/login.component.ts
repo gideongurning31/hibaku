@@ -54,8 +54,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       const dialogRef = this.matDialog.open(RegistrasiAkunComponent);
       const subs: Subscription = dialogRef.componentInstance.successRegister
         .subscribe((credentials: LoginPayload) => {
-          this.loginForm.controls.username.setValue(credentials.username);
-          this.loginForm.controls.password.setValue(credentials.password);
+          this.loginForm.get('username').setValue(credentials.username);
+          this.loginForm.get('password').setValue(credentials.password);
           this.submitLogin(subs);
         });
     }

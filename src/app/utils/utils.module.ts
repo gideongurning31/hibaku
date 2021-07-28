@@ -12,12 +12,14 @@ import { NotFoundComponent } from './component/not-found.component';
 import { AlertDialogComponent } from './component/alert-dialog.component';
 import { SpinnerCloakComponent } from './component/spinner-cloak/spinner-cloak.component';
 import { FullAddressPipe } from './pipe/full-address.pipe';
+import { NoWhitespacePipe } from './pipe/no-whitespace.pipe';
+import { OnlyNumericPipe } from './pipe/only-numeric.pipe';
 
 @NgModule({
-  declarations: [BaseFormComponent, NotFoundComponent, AlertDialogComponent, SpinnerCloakComponent, FullAddressPipe],
+  declarations: [BaseFormComponent, NotFoundComponent, AlertDialogComponent, SpinnerCloakComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
   entryComponents: [],
   imports: [CommonModule, HttpClientModule, MatDialogModule, MatProgressSpinnerModule],
   providers: [RouteGuard, LoginGuard, HttpUtilService, AuthService, SpinnerCloakService],
-  exports: [BaseFormComponent, SpinnerCloakComponent, FullAddressPipe],
+  exports: [BaseFormComponent, SpinnerCloakComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
 })
 export class UtilsModule {}

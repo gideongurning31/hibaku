@@ -13,8 +13,9 @@
             id="inputUserId"
             formControlName="username"
             placeholder="User ID"
-            [ngClass]="{ 'field-error': loginForm.controls['username'].errors && loginForm.controls['username'].touched }">
-            <span *ngIf="loginForm.controls['username'].errors && loginForm.controls['username'].dirty" class="form-error-message">
+            [value]="loginForm.get('username').value | lowercase | noWhitespace"
+            [ngClass]="{ 'field-error': loginForm.get('username').errors && loginForm.get('username').touched }">
+            <span *ngIf="loginForm.get('username').errors && loginForm.get('username').dirty" class="form-error-message">
               User ID wajib diisi.
             </span>
         </div>
@@ -24,8 +25,8 @@
             id="inputPass"
             formControlName="password"
             placeholder="Password"
-            [ngClass]="{ 'field-error': loginForm.controls['password'].errors && loginForm.controls['password'].touched }">
-            <span *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty" class="form-error-message">
+            [ngClass]="{ 'field-error': loginForm.get('password').errors && loginForm.get('password').touched }">
+            <span *ngIf="loginForm.get('password').errors && loginForm.get('password').dirty" class="form-error-message">
               Password wajib diisi.
             </span>
         </div>
