@@ -5,10 +5,7 @@ export class OnlyNumericPipe implements PipeTransform {
   constructor() {}
 
   transform(input: string): string {
-    if (input) {
-      return input.replace(/[^0-9.]/g, '');
-    }
-
-    return input;
+    if (input) return input.replace(/[^0-9.]/g, '');
+    return '';
   }
 }

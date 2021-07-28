@@ -30,15 +30,6 @@ img.logo {
   max-width: 250px;
 }
 
-.form-error-message, #loginError {
-  font-weight: bold;
-  color: var(--colorErr);
-}
-
-.field-error {
-  border: 2px solid var(--color1);
-}
-
 .btn-login,
 .btn-login:focus {
   color: var(--color4);

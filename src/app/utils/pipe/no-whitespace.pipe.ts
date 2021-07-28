@@ -5,10 +5,7 @@ export class NoWhitespacePipe implements PipeTransform {
   constructor() {}
 
   transform(input: string): string {
-    if (input) {
-      return input.trim().replace(/ /g, '');
-    }
-
-    return input;
+    if (input) return input.trim().replace(/ /g, '');
+    return '';
   }
 }

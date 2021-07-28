@@ -22,7 +22,7 @@ export class AuthService {
       localStorage.setItem('displayName', payload.displayName);
       localStorage.setItem('roleId', payload.role.id);
       localStorage.setItem('roleName', payload.role.name);
-      localStorage.setItem('expiredAt', moment(payload.exp * 1000).format());
+      localStorage.setItem('expiredAt', moment(payload.exp * 1000).format('DDMMYY'));
     }
   }
 

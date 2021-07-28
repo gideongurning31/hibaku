@@ -15,20 +15,22 @@ import * as moment from 'moment';
   providers: [RegistrasiService],
 })
 export class RegistrasiUserComponent extends BaseFormComponent implements OnInit {
-  registerForm: FormGroup;
+  timestamp: string;
+  form: FormGroup;
 
   constructor(private dialogRef: MatDialogRef<RegistrasiUserComponent>, private registerService: RegistrasiService, dialog: MatDialog, spinner: SpinnerCloakService) {
     super(dialog, spinner);
   }
 
   ngOnInit(): void {
+    this.timestamp = moment(new Date()).format('YYYY-MM-DD');
     this.initForm();
   }
 
   initForm() {
-    this.registerForm = new FormGroup({
+    this.form = new FormGroup({
       accountType: new FormControl(null, Validators.required),
-      nik: new FormControl(null, Validators.required),
+      nik: new FormControl(null, [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null),
       birthPlace: new FormControl(null, Validators.required),
@@ -37,13 +39,13 @@ export class RegistrasiUserComponent extends BaseFormComponent implements OnInit
       address2: new FormControl(null, Validators.required),
       address3: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
-      zipCode: new FormControl(null, Validators.required),
+      zipCode: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]),
     });
   }
 
   submit() {
     this.setSpinner(true);
-    const form = this.registerForm.value;
+    const form = this.form.value;
     const subscription: Subscription = this.registerService
       .registerUser({
         nik: form.nik,
@@ -58,11 +60,11 @@ export class RegistrasiUserComponent extends BaseFormComponent implements OnInit
       }).subscribe((resp: RegistrasiUser) => {
         this.close();
         this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAKU dengan NIK: ${resp.nik}`);
-      }, (err) => this.onErrorResponse(subscription, err));
+      }, err => this.onErrorResponse(subscription, err));
   }
 
   close() {
-    this.registerForm.reset();
+    this.form.reset();
     this.dialogRef.close();
   }
 }

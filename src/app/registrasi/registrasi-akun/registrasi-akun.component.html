@@ -5,12 +5,17 @@
     <div class="form-group">
       <label for="inputNik">NIK:</label>
       <input type="text"
+        maxlength="16"
         formControlName="nik"
         class="form-control"
         id="inputNik"
         placeholder="16 digit Nomor Induk KTP"
-        [value]="form.get('nik').value | onlyNumeric | noWhitespace"/>
-      <small class="form-text text-muted">*NIK yang sebelumnya telah didaftarkan pada menu Registrasi User HIBAKU</small>
+        [value]="form.get('nik').value | onlyNumeric | noWhitespace"
+        [ngClass]="{ 'is-invalid': form.get('nik').errors && form.get('nik').dirty }"/>
+      <small class="form-text text-muted">*NIK yang sebelumnya telah didaftarkan pada menu Registrasi User HIBAKU.</small>
+      <div *ngIf="form.get('nik').dirty && form.get('nik').errors" class="invalid-feedback">
+        NIK wajib diisi, panjang karakter 16 digit.
+      </div>
     </div>
     <div class="form-group">
       <label for="inputUserId">User ID:</label>
@@ -19,21 +24,33 @@
         class="form-control"
         id="inputUserId"
         placeholder="userid.123"
-        [value]="form.get('userId').value | lowercase | noWhitespace"/>
-      <small class="form-text text-muted">*Gunakan alamat email atau kombinasi [nama-depan].[nama-belakang] agar mudah diingat</small>
+        [value]="form.get('userId').value | lowercase | noWhitespace"
+        [ngClass]="{ 'is-invalid': form.get('userId').errors && form.get('userId').dirty }"/>
+      <small class="form-text text-muted">*Gunakan alamat email atau kombinasi [nama-depan].[nama-belakang] agar mudah diingat.</small>
+      <div *ngIf="form.get('userId').dirty && form.get('userId').errors" class="invalid-feedback">
+        User ID wajib diisi, minimal {{ form.get('userId').errors.minlength.requiredLength }} karakter.
+      </div>
     </div>
     <div class="form-group">
       <label for="inputPass">Kata Sandi:</label>
-      <input type="password" formControlName="pass" class="form-control" id="inputPass" placeholder="Password"/>
+      <input type="password"
+        formControlName="pass"
+        class="form-control"
+        id="inputPass"
+        placeholder="Password"
+        [ngClass]="{ 'is-invalid': form.get('pass').errors && form.get('pass').dirty }"/>
+      <div *ngIf="form.get('pass').dirty && form.get('pass').errors" class="invalid-feedback">
+        Kata sandi wajib diisi, minimal {{ form.get('pass').errors.minlength.requiredLength }} karakter.
+      </div>
     </div>
-    <div class="form-group" *ngIf="form.get('pass').value">
+    <div class="form-group" *ngIf="form.get('pass').valid">
       <label for="inputPassConfirm">Ulangi Kata Sandi:</label>
       <input type="password"
         formControlName="passConfirm"
         class="form-control"
         id="inputPassConfirm"
         placeholder="Password"
-        [ngClass]="{'is-invalid': form.get('passConfirm').value && form.get('passConfirm').value !== form.get('pass').value}"/>
+        [ngClass]="{'is-invalid': form.get('passConfirm').dirty && form.get('passConfirm').value !== form.get('pass').value}"/>
       <div class="invalid-feedback">Kata sandi tidak sesuai</div>
     </div>
     <hr>
