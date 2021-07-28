@@ -21,3 +21,21 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: "Montserrat", "Helvetica Neue", sans-serif;
 }
+
+.btn-primary {
+  background-color: var(--color1);
+  border-color: var(--color2);
+}
+
+.btn-primary:hover {
+  background-color: var(--color3);
+  border-color: var(--color4);
+  color: var(--color1);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color1);
+  border-color: var(--color2);
+  color: #FFF;
+  opacity: .3;
+}
