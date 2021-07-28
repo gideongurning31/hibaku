@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('icomoon/icomoon.eot?u7ukk3');
-  src: url('icomoon/icomoon.eot?u7ukk3#iefix') format('embedded-opentype'),
-    url('icomoon/icomoon.ttf?u7ukk3') format('truetype'),
-    url('icomoon/icomoon.woff?u7ukk3') format('woff'),
-    url('icomoon/icomoon.svg?u7ukk3#icomoon') format('svg');
+  src: url('icomoon/icomoon.eot?8wejxa');
+  src: url('icomoon/icomoon.eot?8wejxa#iefix') format('embedded-opentype'),
+    url('icomoon/icomoon.ttf?8wejxa') format('truetype'),
+    url('icomoon/icomoon.woff?8wejxa') format('woff'),
+    url('icomoon/icomoon.svg?8wejxa#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -21,6 +21,6 @@ i.gg {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.gg-hibahku:before {
+.gg-hibaku:before {
   content: "\e900";
 }

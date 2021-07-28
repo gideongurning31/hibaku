@@ -25,17 +25,9 @@
 }
 
 img.logo {
-  margin: 25px;
   padding: 0;
-}
-
-.form-error-message, #loginError {
-  font-weight: bold;
-  color: var(--colorErr);
-}
-
-.field-error {
-  border: 2px solid var(--color1);
+  margin: 15px;
+  max-width: 250px;
 }
 
 .btn-login,

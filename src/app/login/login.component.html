@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login-box">
       <div class="logo-box">
-        <img src="assets/Hibahku-logo.svg" class="logo" alt="HIBAKU logo">
+        <img src="assets/hibaku-text-logo.svg" class="logo" alt="HIBAKU logo">
       </div>
       <h4 class="login-header">LOGIN</h4>
       <hr>
@@ -13,10 +13,16 @@
             id="inputUserId"
             formControlName="username"
             placeholder="User ID"
-            [ngClass]="{ 'field-error': loginForm.controls['username'].errors && loginForm.controls['username'].touched }">
-            <span *ngIf="loginForm.controls['username'].errors && loginForm.controls['username'].dirty" class="form-error-message">
+            [value]="loginForm.get('username').value | lowercase | noWhitespace"
+            [ngClass]="{ 'is-invalid': loginForm.get('username').errors && loginForm.get('username').touched }">
+          <ng-container *ngIf="loginForm.get('username').dirty && loginForm.get('username').errors">
+            <div *ngIf="loginForm.get('username').errors.required" class="invalid-feedback">
               User ID wajib diisi.
-            </span>
+            </div>
+            <div *ngIf="loginForm.get('username').errors.minlength" class="invalid-feedback">
+              User ID minimal {{ loginForm.get('username').errors.minlength.requiredLength }} karakter.
+            </div>
+          </ng-container>
         </div>
         <div class="form-group">
           <input type="password"
@@ -24,12 +30,16 @@
             id="inputPass"
             formControlName="password"
             placeholder="Password"
-            [ngClass]="{ 'field-error': loginForm.controls['password'].errors && loginForm.controls['password'].touched }">
-            <span *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty" class="form-error-message">
-              Password wajib diisi.
-            </span>
+            [ngClass]="{ 'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched }">
+          <ng-container *ngIf="loginForm.get('password').dirty && loginForm.get('password').errors">
+            <div *ngIf="loginForm.get('password').errors.required" class="invalid-feedback">
+              Kata sandi wajib diisi.
+            </div>
+            <div *ngIf="loginForm.get('password').errors.minlength" class="invalid-feedback">
+              Kata sandi minimal {{ loginForm.get('password').errors.minlength.requiredLength }} karakter.
+            </div>
+          </ng-container>
         </div>
-        <small *ngIf="false" id="loginError" class="form-text">User ID dan/atau password salah</small>
         <button type="submit" class="btn btn-block btn-login" [disabled]="!loginForm.valid">LOGIN</button>
         <hr>
         <div class="reg-button-container">

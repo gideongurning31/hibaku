@@ -27,9 +27,9 @@ export class RegistrasiAkunComponent extends BaseFormComponent implements OnInit
 
   initForm() {
     this.form = new FormGroup({
-      nik: new FormControl(null, Validators.required),
-      userId: new FormControl(null, Validators.required),
-      pass: new FormControl(null, Validators.required),
+      nik: new FormControl(null, [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
+      userId: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      pass: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       passConfirm: new FormControl(null, Validators.required),
     });
   }

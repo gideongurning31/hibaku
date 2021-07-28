@@ -1,7 +1,7 @@
 <div class="registrasi-container">
   <h5 style="text-align: center; font-weight: bold;">REGISTRASI USER HIBAKU</h5>
   <hr>
-  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-check form-check-inline">
       <label class="form-check-label">Jenis Akun:</label>
     </div>
@@ -17,56 +17,127 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="inputNik">NIK:</label>
-        <input type="text" formControlName="nik" class="form-control" id="inputNik">
+        <input type="text"
+          maxlength="16"
+          formControlName="nik"
+          class="form-control"
+          id="inputNik"
+          [value]="form.get('nik').value | onlyNumeric | noWhitespace"
+          [ngClass]="{ 'is-invalid': form.get('nik').errors && form.get('nik').dirty }">
         <small class="form-text text-muted">*16 digit Nomor Induk KTP tanpa spasi dan/atau tanda "-"</small>
+        <div *ngIf="form.get('nik').dirty && form.get('nik').errors" class="invalid-feedback">
+          NIK wajib diisi, panjang karakter 16 digit.
+        </div>
       </div>
       <div class="form-group col-md-4">
         <label for="inputFirstName">Nama Depan:</label>
-        <input type="text" formControlName="firstName" class="form-control" id="inputFirstName">
+        <input type="text"
+          formControlName="firstName"
+          class="form-control"
+          id="inputFirstName"
+          [value]="form.get('firstName').value | noWhitespace"
+          [ngClass]="{ 'is-invalid': form.get('firstName').errors && form.get('firstName').dirty }">
         <small class="form-text text-muted">*Nama sesuai KTP</small>
+        <div *ngIf="form.get('firstName').dirty && form.get('firstName').errors" class="invalid-feedback">
+          Nama wajib diisi.
+        </div>
       </div>
       <div class="form-group col-md-4">
         <label for="inputLastName">Nama Belakang:</label>
-        <input type="text" formControlName="lastName" class="form-control" id="inputLastName">
+        <input type="text" formControlName="lastName" class="form-control" id="inputLastName" [value]="form.get('lastName').value | noWhitespace">
         <small class="form-text text-muted">*Kosongkan jika tidak ada</small>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputBirthPlace">Tempat Lahir:</label>
-        <input type="text" formControlName="birthPlace" class="form-control" id="inputBirthPlace" placeholder="Kota/Kabupaten">
+        <input type="text"
+          formControlName="birthPlace"
+          class="form-control"
+          id="inputBirthPlace"
+          placeholder="Kota/Kabupaten"
+          [ngClass]="{ 'is-invalid': form.get('birthPlace').errors && form.get('birthPlace').dirty }">
+        <div *ngIf="form.get('birthPlace').dirty && form.get('birthPlace').errors" class="invalid-feedback">
+          Tempat lahir wajib diisi.
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="inputBirthDate">Tanggal Lahir:</label>
-        <input type="date" formControlName="birthDate" class="form-control" id="inputBirthDate">
+        <input type="date"
+          formControlName="birthDate"
+          class="form-control"
+          id="inputBirthDate"
+          max="{{ timestamp }}"
+          [ngClass]="{ 'is-invalid': form.get('birthDate').errors && form.get('birthDate').dirty }">
+        <div *ngIf="form.get('birthDate').dirty && form.get('birthDate').errors" class="invalid-feedback">
+          Tanggal lahir wajib diisi.
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="inputAddress1">Alamat:</label>
-      <input type="text" formControlName="address1" class="form-control" id="inputAddress1">
+      <input type="text"
+        formControlName="address1"
+        class="form-control"
+        id="inputAddress1"
+        placeholder="Jalan Mahmud No. 123 RT/RW 04/06"
+        [ngClass]="{ 'is-invalid': form.get('address1').errors && form.get('address1').dirty }">
       <small class="form-text text-muted">*Alamat sesuai KTP (tanpa kelurahan/kecamatan dan kota).</small>
+      <div *ngIf="form.get('address1').dirty && form.get('address1').errors" class="invalid-feedback">
+        Alamat wajib diisi.
+      </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="inputAddress2">Desa/Kelurahan:</label>
-        <input type="text" formControlName="address2" class="form-control" id="inputAddress2">
+        <input type="text"
+          formControlName="address2"
+          class="form-control"
+          id="inputAddress2"
+          [ngClass]="{ 'is-invalid': form.get('address2').errors && form.get('address2').dirty }">
+        <div *ngIf="form.get('address2').dirty && form.get('address2').errors" class="invalid-feedback">
+          Desa/Kelurahan wajib diisi.
+        </div>
       </div>
       <div class="form-group col-md-3">
         <label for="inputAddress3">Kecamatan:</label>
-        <input type="text" formControlName="address3" class="form-control" id="inputAddress3">
+        <input type="text"
+          formControlName="address3"
+          class="form-control"
+          id="inputAddress3"
+          [ngClass]="{ 'is-invalid': form.get('address3').errors && form.get('address3').dirty }">
+        <div *ngIf="form.get('address3').dirty && form.get('address3').errors" class="invalid-feedback">
+          Kecamatan wajib diisi.
+        </div>
       </div>
       <div class="form-group col-md-3">
         <label for="inputCity">Kabupaten/Kota:</label>
-        <input type="text" formControlName="city" class="form-control" id="inputCity">
+        <input type="text"
+          formControlName="city"
+          class="form-control"
+          id="inputCity"
+          [ngClass]="{ 'is-invalid': form.get('city').errors && form.get('city').dirty }">
+        <div *ngIf="form.get('city').dirty && form.get('city').errors" class="invalid-feedback">
+          Kota/Kabupaten wajib diisi.
+        </div>
       </div>
       <div class="form-group col-md-3">
         <label for="inputZip">Kode Pos:</label>
-        <input type="text" formControlName="zipCode" class="form-control" id="inputZip">
+        <input type="text"
+          maxlength="5"
+          formControlName="zipCode"
+          class="form-control"
+          id="inputZip"
+          [value]="form.get('zipCode').value | onlyNumeric | noWhitespace"
+          [ngClass]="{ 'is-invalid': form.get('zipCode').errors && form.get('zipCode').dirty }">
+        <div *ngIf="form.get('zipCode').dirty && form.get('zipCode').errors" class="invalid-feedback">
+          Kode pos wajib diisi.
+        </div>
       </div>
     </div>
     <hr>
     <div class="button-container">
-      <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">KIRIM</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">KIRIM</button>
       <button type="button" class="btn btn-danger" (click)="close()">BATAL</button>
     </div>
   </form>

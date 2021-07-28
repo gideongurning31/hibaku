@@ -14,6 +14,14 @@ mat-sidenav {
   text-align: center;
 }
 
+.sidenav-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  min-height: 80vh;
+}
+
 .title {
   font-family: "Montserrat", "Helvetica Neue", sans-serif;
   font-weight: bold;
@@ -37,6 +45,7 @@ mat-sidenav {
 
 mat-sidenav-container {
   height: calc(100vh - 65px);
+  background-color: var(--color3);
 }
 
 .menu-button {
@@ -70,4 +79,14 @@ mat-divider {
   margin-top: 16px;
   margin-bottom: 16px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.not-verified {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 150%;
+  color: var(--color1);
+  margin-top: 15%;
 }
