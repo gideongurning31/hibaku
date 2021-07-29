@@ -29,7 +29,6 @@
     "@angular/router": "~9.1.4",
     "app-root-dir": "^1.0.2",
     "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -73,7 +72,6 @@
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "^7.0.0",
-    "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   }

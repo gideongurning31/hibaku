@@ -1,11 +1,11 @@
 'use strict';
+const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const moment = require('moment');
 const compression = require('compression');
-const bodyParser = require('body-parser');
 const requestSanitizer = require('express-sanitize-escape');
-const Router = require('express').Router();
+const Router = express.Router();
 
 Router.all('*', (req, res, next) => {
   req.app.set('request-timestamp', moment().valueOf());
@@ -30,8 +30,7 @@ if (process.env.APP_STAGE.toUpperCase() !== 'DEVELOPMENT') {
 Router.use(cors(corsOptions));
 Router.use(helmet());
 Router.use(compression());
-Router.use(bodyParser.urlencoded({ extended: true }));
-Router.use(bodyParser.json({ limit: '50mb' }));
+Router.use(express.json());
 Router.use(requestSanitizer.middleware());
 
 module.exports = Router;
