@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hibahku": {
+    "hibaku": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,14 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hibahku",
+            "outputPath": "dist/hibaku",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/hibahku.ico",
+              "src/hibaku.ico",
               "src/assets"
             ],
             "styles": [
@@ -74,18 +74,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hibahku:build"
+            "browserTarget": "hibaku:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "hibahku:build:production"
+              "browserTarget": "hibaku:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hibahku:build"
+            "browserTarget": "hibaku:build"
           }
         },
         "test": {
@@ -96,7 +96,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/hibahku.ico",
+              "src/hibaku.ico",
               "src/assets"
             ],
             "styles": [
@@ -123,16 +123,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "hibahku:serve"
+            "devServerTarget": "hibaku:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "hibahku:serve:production"
+              "devServerTarget": "hibaku:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "hibahku"
+  "defaultProject": "hibaku"
 }
