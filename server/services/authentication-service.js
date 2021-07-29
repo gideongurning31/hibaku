@@ -1,3 +1,4 @@
+'use strict';
 let self;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -16,7 +17,7 @@ class AuthenticationService {
   }
 
   login(userId, pass) {
-    return UserService.findByAccountName(userId).then((user) => {
+    return UserService.findByAccountName(userId).then(user => {
       if (!user || !bcrypt.compareSync(pass, user.pass)) {
         throw new ApplicationError('Kombinasi username / password salah.');
       }

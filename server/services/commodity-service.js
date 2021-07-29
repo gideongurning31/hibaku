@@ -1,3 +1,4 @@
+'use strict';
 let self;
 const uuid = require('uuid');
 const Model = require('../models/index');

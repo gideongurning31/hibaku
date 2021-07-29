@@ -16,5 +16,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  Commodities.associate = models => {
+    models.Commodities.belongsToMany(models.Accounts, {
+      onDelete: 'RESTRICT',
+      onUpdate: 'CASCADE',
+      through: models.UsersCommodities,
+      foreignKey: 'commodityId',
+      as: 'owner',
+    });
+  };
+
   return Commodities;
 };

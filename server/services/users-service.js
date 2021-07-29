@@ -1,3 +1,4 @@
+'use strict';
 const Model = require('../models/index');
 const AccountsModel = Model.Accounts;
 const UsersInfoModel = Model.UsersInfo;

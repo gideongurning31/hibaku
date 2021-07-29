@@ -17,12 +17,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Accounts.associate = (models) => {
+  Accounts.associate = models => {
     models.Accounts.belongsTo(models.Roles, {
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE',
       foreignKey: 'roleId',
       as: 'role',
+    });
+    models.Accounts.belongsToMany(models.Commodities, {
+      onDelete: 'RESTRICT',
+      onUpdate: 'CASCADE',
+      through: models.UsersCommodities,
+      foreignKey: 'userId',
+      as: 'commodities',
     });
   };
 
