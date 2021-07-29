@@ -1,4 +1,3 @@
-import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +14,7 @@ import { Commodity, CommodityService } from '../../service/commodity-service';
 export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
   form: FormGroup;
   commodities: Array<Commodity>;
-  type: Array<KeyValue<string, string>>;
+  quantityUnit: string;
 
   constructor(private commodityService: CommodityService, dialog: MatDialog, spinner: SpinnerCloakService) {
     super(dialog, spinner);
@@ -27,11 +26,6 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
 
   initForm(): void {
     this.fetchCommodities();
-    this.type = [
-      { key: 'Pasokan', value: 'SUPPLY' },
-      { key: 'Permintaan', value: 'DEMAND' },
-    ];
-
     this.form = new FormGroup({
       commodityId: new FormControl(null, Validators.required),
       quantity: new FormControl(null, Validators.required),
@@ -40,6 +34,7 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
   }
 
   fetchCommodities() {
+    this.setSpinner(true);
     this.commodities = [];
     const subscription: Subscription = this.commodityService.fetchDataTable()
       .subscribe(data => {
@@ -49,11 +44,35 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
   }
 
   submit() {
+    this.setSpinner(true);
     const subscription: Subscription = this.commodityService
       .addSupply(this.form.value)
       .subscribe(() => {
         const message = `${this.form.get('type').value === 'DEMAND' ? 'Permintaan' : 'Pasokan'} telah diterima.`;
         this.okResponse(subscription, message);
+        this.resetForm();
       }, err => this.onErrorResponse(subscription, err));
+  }
+
+  resetForm() {
+    this.form.removeControl('price');
+    this.form.reset();
+  }
+
+  onSelectType(value: string) {
+    if (value === 'SUPPLY') {
+      this.form.addControl('price', new FormControl(null, Validators.required));
+    } else if (value === 'DEMAND' && this.form.get('price')) {
+      this.form.removeControl('price');
+    }
+  }
+
+  onSelectCommodity() {
+    const id = this.form.get('commodityId').value;
+    this.commodities.forEach((commodity) => {
+      if (id === commodity.id) {
+        this.quantityUnit = commodity.unit;
+      }
+    });
   }
 }

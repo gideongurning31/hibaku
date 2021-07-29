@@ -42,4 +42,5 @@ export interface UsersCommodities {
   commodityId: string;
   quantity: number;
   type: string;
+  price?: number;
 }
