@@ -21,12 +21,25 @@ export class CommodityService {
     const payload = type === ActionType.DELETE ? {} : data;
     return this.http.post(endpoint, payload);
   }
+
+  addSupply(payload: UsersCommodities) {
+    payload.userId = localStorage.getItem('userId');
+    return this.http.post('/users-commodities', payload);
+  }
 }
 
 export interface Commodity {
-  id: string;
+  id?: string;
   name: string;
   type: string;
   unit: string;
   price: number;
+}
+
+export interface UsersCommodities {
+  id?: string;
+  userId: string;
+  commodityId: string;
+  quantity: number;
+  type: string;
 }

@@ -29,7 +29,9 @@ class UsersCommodityController extends BaseController {
   }
 
   create(req, res, next) {
-    res.status(200).json(req.body);
+    UsersCommodityService.create(req.body)
+      .then((result) => res.status(200).json(result))
+      .catch(next);
   }
 
   delete(req, res, next) {

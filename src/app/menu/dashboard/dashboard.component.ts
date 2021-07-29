@@ -38,8 +38,8 @@ export class DashboardComponent implements OnInit {
         { name: 'Beranda', icon: 'fa-home', route: '' },
         { name: 'Transaksi', icon: 'fa-handshake-o', route: 'transaksi' },
         { name: 'Komoditas', icon: 'fa-shopping-basket', route: 'komoditas' },
-        { name: 'Registrasi Produsen', icon: 'fa-cart-plus', route: 'registrasi-produsen' },
-        { name: 'Registrasi Penerima', icon: 'fa-id-card-o', route: 'registrasi-penerima' },
+        { name: 'Supply / Demand', icon: 'fa-cart-plus', route: 'supply-demand' },
+        { name: 'Registrasi User', icon: 'fa-id-card-o', route: 'registrasi-penerima' },
       ];
     }
   }

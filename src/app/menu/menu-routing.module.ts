@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { RouteGuard } from '../utils/service/route-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './pages/home.component';
-import { RegProdusenComponent } from './pages/reg-produsen.component';
-import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
-import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { TransaksiComponent } from './pages/transaksi.component';
+import { KomoditasComponent } from './pages/komoditas/komoditas.component';
+import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
+import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
 
 const routes: Routes = [
   {
@@ -29,8 +29,8 @@ const routes: Routes = [
         canActivate: [RouteGuard],
       },
       {
-        path: 'registrasi-produsen',
-        component: RegProdusenComponent,
+        path: 'supply-demand',
+        component: SupplyDemandComponent,
         canActivate: [RouteGuard],
       },
       {

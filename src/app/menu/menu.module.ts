@@ -13,13 +13,24 @@ import { HomeComponent } from './pages/home.component';
 import { TransaksiComponent } from './pages/transaksi.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { KomoditasFormComponent } from './pages/komoditas/komoditas-form/komoditas-form.component';
+import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
 import { RegProdusenComponent } from './pages/reg-produsen.component';
 import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
 import { VerifyConfirmComponent } from './pages/reg-penerima/verify-confirm/verify-confirm.component';
 import { CommodityService } from './service/commodity-service';
 
 @NgModule({
-  declarations: [DashboardComponent, HomeComponent, TransaksiComponent, KomoditasComponent, KomoditasFormComponent, RegProdusenComponent, RegPenerimaComponent, VerifyConfirmComponent],
+  declarations: [
+    DashboardComponent,
+    HomeComponent,
+    TransaksiComponent,
+    KomoditasComponent,
+    KomoditasFormComponent,
+    SupplyDemandComponent,
+    RegProdusenComponent,
+    RegPenerimaComponent,
+    VerifyConfirmComponent,
+  ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSidenavModule, MatToolbarModule, MatButtonModule, MatDividerModule, MatTooltipModule, MenuRoutingModule, UtilsModule],
   providers: [CommodityService],
 })
