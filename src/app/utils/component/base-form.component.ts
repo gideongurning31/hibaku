@@ -1,5 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { AlertDialogComponent } from './alert-dialog.component';
 import { SpinnerCloakService } from './spinner-cloak/spinner-cloak.service';
@@ -24,7 +25,11 @@ export class BaseFormComponent {
   onErrorResponse(subscription: Subscription, e: any) {
     subscription.unsubscribe();
     this.spinner.setSpinner(false);
-    this.alertDialog(e);
+    if (e instanceof HttpErrorResponse) {
+      this.alertDialog('Terjadi kesalahan pada internal sistem.');
+    } else {
+      this.alertDialog(e);
+    }
   }
 
   alertDialog(message: string) {

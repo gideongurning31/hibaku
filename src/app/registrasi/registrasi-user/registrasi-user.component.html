@@ -81,6 +81,7 @@
         class="form-control"
         id="inputAddress1"
         placeholder="Jalan Mahmud No. 123 RT/RW 04/06"
+        [value]="form.get('address1').value | titlecase"
         [ngClass]="{ 'is-invalid': form.get('address1').errors && form.get('address1').dirty }">
       <small class="form-text text-muted">*Alamat sesuai KTP (tanpa kelurahan/kecamatan dan kota).</small>
       <div *ngIf="form.get('address1').dirty && form.get('address1').errors" class="invalid-feedback">
@@ -94,6 +95,7 @@
           formControlName="address2"
           class="form-control"
           id="inputAddress2"
+          [value]="form.get('address2').value | titlecase"
           [ngClass]="{ 'is-invalid': form.get('address2').errors && form.get('address2').dirty }">
         <div *ngIf="form.get('address2').dirty && form.get('address2').errors" class="invalid-feedback">
           Desa/Kelurahan wajib diisi.
@@ -105,6 +107,7 @@
           formControlName="address3"
           class="form-control"
           id="inputAddress3"
+          [value]="form.get('address3').value | titlecase"
           [ngClass]="{ 'is-invalid': form.get('address3').errors && form.get('address3').dirty }">
         <div *ngIf="form.get('address3').dirty && form.get('address3').errors" class="invalid-feedback">
           Kecamatan wajib diisi.
@@ -116,6 +119,7 @@
           formControlName="city"
           class="form-control"
           id="inputCity"
+          [value]="form.get('city').value | titlecase"
           [ngClass]="{ 'is-invalid': form.get('city').errors && form.get('city').dirty }">
         <div *ngIf="form.get('city').dirty && form.get('city').errors" class="invalid-feedback">
           Kota/Kabupaten wajib diisi.
@@ -130,9 +134,14 @@
           id="inputZip"
           [value]="form.get('zipCode').value | onlyNumeric | noWhitespace"
           [ngClass]="{ 'is-invalid': form.get('zipCode').errors && form.get('zipCode').dirty }">
-        <div *ngIf="form.get('zipCode').dirty && form.get('zipCode').errors" class="invalid-feedback">
-          Kode pos wajib diisi.
-        </div>
+        <ng-container *ngIf="form.get('zipCode').dirty && form.get('zipCode').errors">
+          <div *ngIf="form.get('zipCode').errors.required" class="invalid-feedback">
+            Kode Pos wajib diisi.
+          </div>
+          <div *ngIf="form.get('zipCode').errors.minlength" class="invalid-feedback">
+            Kode Pos minimal {{ form.get('zipCode').errors.minlength.requiredLength }} karakter.
+          </div>
+        </ng-container>
       </div>
     </div>
     <hr>
