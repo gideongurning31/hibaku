@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       commodityId: { type: DataTypes.STRING(36), allowNull: false },
       quantity: { type: DataTypes.INTEGER, allowNull: false },
       type: { type: DataTypes.STRING(10), allowNull: false },
+      createdDate: { type: DataTypes.DATE, allowNull: false },
     },
     {
       tableName: 'users_commodities',
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   UsersCommodities.associate = models => {
     models.UsersCommodities.belongsTo(models.Accounts, {
       foreignKey: 'userId',
-      as: 'owner',
+      as: 'userDetails',
     });
     models.UsersCommodities.belongsTo(models.Commodities, {
       foreignKey: 'commodityId',

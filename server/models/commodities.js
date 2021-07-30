@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'CASCADE',
       through: models.UsersCommodities,
       foreignKey: 'commodityId',
-      as: 'owner',
+      as: 'userDetails',
     });
   };
 

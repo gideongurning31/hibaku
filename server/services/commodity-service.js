@@ -3,6 +3,8 @@ let self;
 const uuid = require('uuid');
 const Model = require('../models/index');
 const CommodityModel = Model.Commodities;
+const UsersCommodityModel = Model.UsersCommodities;
+const ApplicationError = require('../core/application-error');
 
 class CommodityService {
   constructor() {
@@ -32,7 +34,11 @@ class CommodityService {
   }
 
   delete(id) {
-    return CommodityModel.destroy({ where: { id }});
+    return UsersCommodityModel.findOne({ where: { commodityId: id }})
+      .then(result => {
+        if (result) throw new ApplicationError(`Komoditas tidak dapat dihapus, karena masih digunakan dalam transaksi yang berlangsung.`);
+        return CommodityModel.destroy({ where: { id } });
+      });
   }
 }
 
