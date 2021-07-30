@@ -9,7 +9,7 @@ import { CommodityService, Commodity } from 'src/app/menu/service/commodity-serv
 @Component({
   selector: 'hibaku-supply-demand-form',
   templateUrl: './supply-demand-form.component.html',
-  styleUrls: ['../supply-demand.component.scss'],
+  styleUrls: ['../supply-demand.component.scss', './supply-demand-form.component.scss'],
 })
 export class SupplyDemandFormComponent extends BaseFormComponent implements OnInit {
   form: FormGroup;
@@ -77,5 +77,10 @@ export class SupplyDemandFormComponent extends BaseFormComponent implements OnIn
         this.quantityUnit = commodity.unit;
       }
     });
+  }
+
+  close() {
+    this.form.reset();
+    this.dialogRef.close();
   }
 }

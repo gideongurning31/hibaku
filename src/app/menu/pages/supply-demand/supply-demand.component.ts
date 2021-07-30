@@ -26,7 +26,7 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
   initDataTable(emitter?: Subscription) {
     if (emitter) emitter.unsubscribe();
     this.setSpinner(true);
-    this.tableHeaders = ['#', 'Komoditas', 'Jumlah', 'Jenis', 'Harga (Total)', 'ID User', 'Atas Nama', 'Tanggal Masuk'];
+    this.tableHeaders = ['#', 'Komoditas', 'Jumlah', 'Jenis', 'Harga (Total)', 'Atas Nama', 'Tanggal Masuk'];
     const subscription: Subscription = this.commodityService.fetchSupplyDemand()
       .subscribe(data => {
         this.dataTable = data;

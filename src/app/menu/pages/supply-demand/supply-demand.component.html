@@ -1,8 +1,7 @@
 <div class="container" style="margin-top: 25px;">
   <div class="row" *ngIf="dataTable && dataTable.length > 0; else noData">
     <table class="table table-bordered table-hover">
-      <thead><tr><th *ngFor="let header of tableHeaders" scope="col">{{ header }}</th></tr>
-      </thead>
+      <thead><tr><th *ngFor="let header of tableHeaders" scope="col">{{ header }}</th></tr></thead>
       <tbody>
         <tr *ngFor="let data of dataTable; let i = index">
           <td><strong>{{ 0 + i + 1 }}</strong></td>
@@ -10,8 +9,7 @@
           <td>{{ data.quantity + ' ' + data.commodityDetails.unit }}</td>
           <td>{{ data.type === 'SUPPLY' ? 'PASOKAN' : 'PERMINTAAN' }}</td>
           <td>{{ data.quantity * data.commodityDetails.price | currency: 'Rp. ' }}</td>
-          <td>{{ data.userId }}</td>
-          <td>{{ data.userDetails.displayName }}</td>
+          <td>{{ data.userDetails.displayName }} - <strong>{{ data.userId }}</strong></td>
           <td>{{ data.createdDate | date: 'dd/MM/yyyy' }}</td>
         </tr>
       </tbody>

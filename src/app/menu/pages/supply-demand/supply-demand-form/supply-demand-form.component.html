@@ -1,90 +1,93 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
 
-  <div class="form-group row">
-    <label class="col-sm-3 col-form-label">Jenis:</label>
-    <div class="col-sm-9">
-      <div class="radio-container">
-        <div class="form-check-inline">
-          <input type="radio"
-            formControlName="type"
-            class="form-check-input"
-            id="radioTypeSupply"
-            value="SUPPLY"
-            (ngModelChange)="onSelectType('SUPPLY')"/>
-          <label class="form-check-label" for="radioTypeSupply">Pasokan</label>
-        </div>
-        <div class="form-check-inline">
-          <input type="radio"
-            formControlName="type"
-            class="form-check-input"
-            id="radioTypeDemand"
-            value="DEMAND"
-            (ngModelChange)="onSelectType('DEMAND')"/>
-          <label class="form-check-label" for="radioTypeDemand">Permintaan</label>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="selectCommodity" class="col-sm-3 col-form-label">Pilih Komoditas:</label>
-    <div class="col-sm-9">
-      <select class="custom-select" id="selectCommodity" formControlName="commodityId" (ngModelChange)="onSelectCommodity()">
-        <option *ngIf="!form.get('commodityId').value"></option>
-        <ng-container *ngFor="let c of commodities">
-          <option value="{{ c.id }}" [selected]="form.get('commodityId').value === c.value">{{ c.name }}</option>
-        </ng-container>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="inputQuantity" class="col-sm-3 col-form-label">Jumlah:</label>
-    <div class="col-sm-9">
-      <div class="input-group">
-        <input type="number"
-          min="0"
-          formControlName="quantity"
-          class="form-control"
-          id="inputQuantity"
-          [ngClass]="{'is-invalid': form.get('quantity').errors && form.get('quantity').dirty}">
-        <div class="input-group-append" *ngIf="quantityUnit">
-          <span class="input-group-text">{{ quantityUnit }}</span>
-        </div>
-        <div *ngIf="form.get('quantity').dirty && form.get('quantity').errors" class="invalid-feedback">
-          Jumlah permintaan/pasokan harus diisi.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <ng-container *ngIf="form.get('price')">
     <div class="form-group row">
-      <label for="inputPrice" class="col-sm-3 col-form-label">Harga:</label>
+      <label class="col-sm-3 col-form-label">Jenis:</label>
+      <div class="col-sm-9">
+        <div class="radio-container">
+          <div class="form-check-inline">
+            <input type="radio"
+              formControlName="type"
+              class="form-check-input"
+              id="radioTypeSupply"
+              value="SUPPLY"
+              (ngModelChange)="onSelectType('SUPPLY')"/>
+            <label class="form-check-label" for="radioTypeSupply">Pasokan</label>
+          </div>
+          <div class="form-check-inline">
+            <input type="radio"
+              formControlName="type"
+              class="form-check-input"
+              id="radioTypeDemand"
+              value="DEMAND"
+              (ngModelChange)="onSelectType('DEMAND')"/>
+            <label class="form-check-label" for="radioTypeDemand">Permintaan</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="selectCommodity" class="col-sm-3 col-form-label">Pilih Komoditas:</label>
+      <div class="col-sm-9">
+        <select class="custom-select" id="selectCommodity" formControlName="commodityId" (ngModelChange)="onSelectCommodity()">
+          <option *ngIf="!form.get('commodityId').value"></option>
+          <ng-container *ngFor="let c of commodities">
+            <option value="{{ c.id }}" [selected]="form.get('commodityId').value === c.value">{{ c.name }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputQuantity" class="col-sm-3 col-form-label">Jumlah:</label>
       <div class="col-sm-9">
         <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Rp.</span>
-          </div>
           <input type="number"
             min="0"
-            formControlName="price"
+            formControlName="quantity"
             class="form-control"
-            id="inputPrice"
-            [ngClass]="{'is-invalid': form.get('price').errors && form.get('price').dirty}">
+            id="inputQuantity"
+            [ngClass]="{'is-invalid': form.get('quantity').errors && form.get('quantity').dirty}">
           <div class="input-group-append" *ngIf="quantityUnit">
-            <span class="input-group-text">{{ 'per '.concat(quantityUnit) }}</span>
+            <span class="input-group-text">{{ quantityUnit }}</span>
           </div>
-          <div *ngIf="form.get('price').dirty && form.get('price').errors" class="invalid-feedback">
-            Harga pengajuan harus diisi.
+          <div *ngIf="form.get('quantity').dirty && form.get('quantity').errors" class="invalid-feedback">
+            Jumlah permintaan/pasokan harus diisi.
           </div>
         </div>
       </div>
     </div>
-  </ng-container>
 
-  <hr>
-  <div class="button-container">
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="!form.valid">KIRIM</button>
-  </div>
-</form>
+    <ng-container *ngIf="form.get('price')">
+      <div class="form-group row">
+        <label for="inputPrice" class="col-sm-3 col-form-label">Harga:</label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rp.</span>
+            </div>
+            <input type="number"
+              min="0"
+              formControlName="price"
+              class="form-control"
+              id="inputPrice"
+              [ngClass]="{'is-invalid': form.get('price').errors && form.get('price').dirty}">
+            <div class="input-group-append" *ngIf="quantityUnit">
+              <span class="input-group-text">{{ 'per '.concat(quantityUnit) }}</span>
+            </div>
+            <div *ngIf="form.get('price').dirty && form.get('price').errors" class="invalid-feedback">
+              Harga pengajuan harus diisi.
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <hr>
+    <div class="button-container">
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">KIRIM</button>
+      <button type="button" class="btn btn-warning" (click)="close()">BATAL</button>
+    </div>
+  </form>
+</div>
