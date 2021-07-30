@@ -6,26 +6,6 @@
   max-width: 100vw;
 }
 
-.table>thead>tr>th,
-.table>tbody>tr>td {
-  vertical-align: middle;
-  font-size: 90%;
-}
-
-th, td {
-  padding: 7px;
-  text-align: center;
-}
-
-thead {
-  background-color: var(--color1);
-  color: #FFF;
-}
-
-tbody {
-  background-color: rgba($color: #fff, $alpha: .5);
-}
-
 i.red {
   margin-left: 10px;
   color: var(--colorErr);
@@ -52,12 +32,4 @@ i.green {
 
 .btn-center {
   margin: auto;
-}
-
-.no-data {
-  width: 80%;
-  margin: 50px 10% 20px;
-  text-align: center;
-  font-weight: bold;
-  font-size: larger;
 }

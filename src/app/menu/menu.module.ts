@@ -14,6 +14,7 @@ import { TransaksiComponent } from './pages/transaksi.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { KomoditasFormComponent } from './pages/komoditas/komoditas-form/komoditas-form.component';
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
+import { SupplyDemandFormComponent } from './pages/supply-demand/supply-demand-form/supply-demand-form.component';
 import { RegProdusenComponent } from './pages/reg-produsen.component';
 import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
 import { VerifyConfirmComponent } from './pages/reg-penerima/verify-confirm/verify-confirm.component';
@@ -27,6 +28,7 @@ import { CommodityService } from './service/commodity-service';
     KomoditasComponent,
     KomoditasFormComponent,
     SupplyDemandComponent,
+    SupplyDemandFormComponent,
     RegProdusenComponent,
     RegPenerimaComponent,
     VerifyConfirmComponent,

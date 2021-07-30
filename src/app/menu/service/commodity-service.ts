@@ -10,6 +10,10 @@ export class CommodityService {
     return this.http.get('/commodity');
   }
 
+  fetchSupplyDemand() {
+    return this.http.get('/supply-demand');
+  }
+
   submit(data: Commodity, type: ActionType = ActionType.CREATE) {
     let endpoint: string = '/commodity';
     if (type === ActionType.UPDATE) {
@@ -22,9 +26,9 @@ export class CommodityService {
     return this.http.post(endpoint, payload);
   }
 
-  addSupply(payload: UsersCommodities) {
+  addSupply(payload: SupplyDemand) {
     payload.userId = localStorage.getItem('userId');
-    return this.http.post('/users-commodities', payload);
+    return this.http.post('/supply-demand', payload);
   }
 }
 
@@ -36,11 +40,26 @@ export interface Commodity {
   price: number;
 }
 
-export interface UsersCommodities {
+export interface SupplyDemand {
   id?: string;
   userId: string;
+  userDetails: SupplyDemandUser;
   commodityId: string;
+  commodityDetails: SupplyDemandItem;
   quantity: number;
   type: string;
+  price?: number;
+  createdDate: Date;
+}
+
+interface SupplyDemandUser {
+  roleId: number;
+  displayName: string;
+}
+
+interface SupplyDemandItem {
+  name: string;
+  type: string;
+  unit: string;
   price?: number;
 }
