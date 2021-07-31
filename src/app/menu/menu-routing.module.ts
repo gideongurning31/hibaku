@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RouteGuard } from '../utils/service/route-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './pages/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { TransaksiComponent } from './pages/transaksi.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';

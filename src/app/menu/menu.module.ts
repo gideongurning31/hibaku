@@ -9,13 +9,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UtilsModule } from '../utils/utils.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './pages/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { TransaksiComponent } from './pages/transaksi.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { KomoditasFormComponent } from './pages/komoditas/komoditas-form/komoditas-form.component';
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
 import { SupplyDemandFormComponent } from './pages/supply-demand/supply-demand-form/supply-demand-form.component';
-import { RegProdusenComponent } from './pages/reg-produsen.component';
 import { UserManagementComponent } from './pages/user-management/user-management';
 import { VerifyConfirmComponent } from './pages/user-management/verify-confirm/verify-confirm.component';
 import { CommodityService } from './service/commodity-service';
@@ -29,7 +28,6 @@ import { CommodityService } from './service/commodity-service';
     KomoditasFormComponent,
     SupplyDemandComponent,
     SupplyDemandFormComponent,
-    RegProdusenComponent,
     UserManagementComponent,
     VerifyConfirmComponent,
   ],

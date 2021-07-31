@@ -11,7 +11,6 @@ import { AuthService } from './service/auth.service';
 import { SpinnerCloakService } from './component/spinner-cloak/spinner-cloak.service';
 import { BaseFormComponent } from './component/base-form.component';
 import { BasePagingComponent } from './component/base-paging.component';
-import { NotFoundComponent } from './component/not-found.component';
 import { AlertDialogComponent } from './component/alert-dialog.component';
 import { SpinnerCloakComponent } from './component/spinner-cloak/spinner-cloak.component';
 import { PaginationComponent } from './component/pagination/pagination.component';
@@ -21,7 +20,7 @@ import { OnlyNumericPipe } from './pipe/only-numeric.pipe';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, FormsModule, MatDialogModule, MatProgressSpinnerModule, MatTooltipModule],
-  declarations: [BaseFormComponent, BasePagingComponent, NotFoundComponent, AlertDialogComponent, SpinnerCloakComponent, PaginationComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
+  declarations: [BaseFormComponent, BasePagingComponent, AlertDialogComponent, SpinnerCloakComponent, PaginationComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
   entryComponents: [],
   providers: [RouteGuard, LoginGuard, HttpUtilService, AuthService, SpinnerCloakService],
   exports: [BaseFormComponent, BasePagingComponent, SpinnerCloakComponent, PaginationComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
