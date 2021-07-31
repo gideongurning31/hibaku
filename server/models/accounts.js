@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Accounts.associate = models => {
+    models.Accounts.hasOne(models.UsersInfo, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+      foreignKey: 'userId',
+      as: 'info',
+    });
     models.Accounts.belongsTo(models.Roles, {
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE',

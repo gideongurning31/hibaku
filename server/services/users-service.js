@@ -23,7 +23,10 @@ class UsersService extends BasePagingService {
       offset: params.offset,
       where: { verified: true },
       attributes: { exclude: ['pass'] },
-      include: [{ model: RolesModel, as: 'role' }],
+      include: [
+        { model: UsersInfoModel, as: 'info' },
+        { model: RolesModel, as: 'role' }
+      ],
     }).then(result => self.generatePaging(result, params));
   }
 
@@ -31,6 +34,7 @@ class UsersService extends BasePagingService {
     return UsersInfoModel.findAndCountAll({
       limit: params.limit,
       offset: params.offset,
+      include: [{ model: AccountsModel, as: 'account', attributes: { exclude: ['userId', 'pass'] }}],
     }).then(result => self.generatePaging(result, params));
   }
 

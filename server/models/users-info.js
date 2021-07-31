@@ -22,5 +22,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  UsersInfo.associate = models => {
+    models.UsersInfo.belongsTo(models.Accounts, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+      foreignKey: 'userId',
+      as: 'account',
+    });
+  };
+
   return UsersInfo;
 };
