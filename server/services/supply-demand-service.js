@@ -5,9 +5,11 @@ const Model = require('../models/index');
 const UserModel = Model.Accounts;
 const CommodityModel = Model.Commodities;
 const UsersCommodityModel = Model.UsersCommodities;
+const BasePagingService = require('../core/base-paging-service');
 
-class SupplyDemandService {
+class SupplyDemandService extends BasePagingService {
   constructor() {
+    super();
     self = this;
     self.includes = [
       { model: UserModel, as: 'userDetails', attributes: ['displayName', 'roleId'] },
@@ -15,8 +17,13 @@ class SupplyDemandService {
     ];
   }
 
-  getAll() {
-    return UsersCommodityModel.findAll({ include: self.includes, order: [['createdDate', 'ASC']] });
+  getAll(params) {
+    return UsersCommodityModel.findAndCountAll({
+      limit: params.limit,
+      offset: params.page,
+      include: self.includes,
+      order: [['createdDate', 'ASC']],
+    }).then(result => self.generatePaging(result, params));
   }
 
   findById(id) {

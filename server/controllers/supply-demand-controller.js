@@ -17,20 +17,20 @@ class SupplyDemandController extends BaseController {
   }
 
   getAll(req, res, next) {
-    SupplyDemandService.getAll()
-      .then((result) => res.status(200).json(result))
+    return SupplyDemandService.getAll(self.generatePaging(req.query))
+      .then(result => res.status(200).json(result))
       .catch(next);
   }
 
   findById(req, res, next) {
     SupplyDemandService.findById(req.params.id)
-      .then((result) => res.status(200).json(result))
+      .then(result => res.status(200).json(result))
       .catch(next);
   }
 
   create(req, res, next) {
     SupplyDemandService.create(req.body)
-      .then((result) => res.status(200).json(result))
+      .then(result => res.status(200).json(result))
       .catch(next);
   }
 

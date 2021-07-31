@@ -11,6 +11,10 @@ class BaseController {
     return this.router;
   }
 
+  generatePaging(reqQuery) {
+    return { page: parseInt(reqQuery.page) || 1, limit: parseInt(reqQuery.limit) || 10 };
+  }
+
   notImplemented(req, res) {
     res.status(405).json({ error: `Request method ${req.method} not allowed on '${process.env.BASE_URL + req.url}'` });
   }
