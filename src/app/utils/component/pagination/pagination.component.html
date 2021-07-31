@@ -19,9 +19,11 @@
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li *ngFor="let page of pages" class="page-item">
-      <a class="page-link" [ngClass]="{'current-page': paging.page === page}" (click)="onPageClick(page)">{{ page }}</a>
-    </li>
+    <ng-container *ngIf="pages && pages.length > 1">
+      <li *ngFor="let page of pages" class="page-item">
+        <a class="page-link" [ngClass]="{'current-page': paging.page === page}" (click)="onPageClick(page)">{{ page }}</a>
+      </li>
+    </ng-container>
     <li class="page-item" *ngIf="paging.totalPage > 1 && paging.page !== paging.totalPage" matTooltipPosition="above" matTooltip="Ke halaman selanjutnya">
       <a class="page-link" aria-label="Next" (click)="onPageClick(paging.page + 1)">
         <span aria-hidden="true">&raquo;</span>

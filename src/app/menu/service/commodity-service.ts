@@ -6,8 +6,8 @@ import { HttpUtilService } from 'src/app/utils/service/http-util.service';
 export class CommodityService {
   constructor(private http: HttpUtilService) {}
 
-  fetchDataTable() {
-    return this.http.get('/commodity');
+  fetchDataTable(page: number = 1, limit: number = 10) {
+    return this.http.get('/commodity'.concat(`?page=${page}&limit=${limit}`));
   }
 
   fetchSupplyDemand(page: number = 1, limit: number = 10) {

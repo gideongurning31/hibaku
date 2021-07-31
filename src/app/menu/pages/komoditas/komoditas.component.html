@@ -4,7 +4,7 @@
       <thead><tr><th *ngFor="let header of tableHeaders" scope="col">{{ header }}</th></tr></thead>
       <tbody>
         <tr *ngFor="let data of dataTable; let i = index">
-          <td><strong>{{ 0 + i + 1 }}</strong></td>
+          <td><strong>{{ i + paging.startRow }}</strong></td>
           <td>{{ data.name }}</td>
           <td>{{ data.type }}</td>
           <td>{{ data.unit }}</td>
@@ -34,6 +34,7 @@
     <p class="no-data">No data to display.</p>
   </ng-template>
   <div class="row btn-container">
+    <hibaku-pagination [paging]="paging" (setPage)="onPagingEvent($event)"></hibaku-pagination>
     <button type="button"
       class="btn btn-primary"
       (click)="openForm()"
