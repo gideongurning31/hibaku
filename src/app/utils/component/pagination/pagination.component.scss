@@ -1,0 +1,26 @@
+ul, li {
+  list-style: none;
+}
+
+.pagination-container {
+  display: flex;
+}
+
+.page-link {
+  cursor: pointer;
+  color: var(--color4);
+  background-color: var(--color1);
+}
+
+.page-link:hover {
+  color: var(--color1);
+  background-color: var(--color4);
+}
+
+.current-page,
+.current-page:hover {
+  cursor: not-allowed;
+  color: #FFF;
+  background-color: var(--color2);
+  font-weight: bold;
+}

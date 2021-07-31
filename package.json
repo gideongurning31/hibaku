@@ -9,8 +9,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "watch": "nodemon server.js",
-    "dev": "concurrently --kill-others \"npm start\" \"ng serve\"",
+    "dev": "nodemon server.js",
+    "hibaku": "concurrently --kill-others \"npm start\" \"ng serve\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
