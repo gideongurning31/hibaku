@@ -23,7 +23,7 @@
               matTooltipPosition="below"
               matTooltip="Verifikasi Akun"
               (click)="verifyUser(data)"
-              [disabled]="!data.userId">
+              [disabled]="!data.userId || data.account.verified">
               <i class="fa fa-pencil-square-o"></i>
             </button>
           </td>

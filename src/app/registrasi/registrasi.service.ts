@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpUtilService } from '../utils/service/http-util.service';
-import { RegistrasiAkun, RegistrasiUser } from './Registrasi.model';
+import { RegistrasiAkun, User } from './User.model';
 
 @Injectable()
 export class RegistrasiService {
   constructor(private http: HttpUtilService) {}
 
-  registerUser(user: RegistrasiUser) {
+  registerUser(user: User) {
     return this.http.post('/user', user);
   }
 

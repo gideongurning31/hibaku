@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { RegistrasiUser } from 'src/app/registrasi/Registrasi.model';
+import { User } from 'src/app/registrasi/User.model';
 
 @Component({
   selector: 'app-verify-confirm',
@@ -8,10 +8,10 @@ import { RegistrasiUser } from 'src/app/registrasi/Registrasi.model';
   styleUrls: ['./verify-confirm.component.scss'],
 })
 export class VerifyConfirmComponent implements OnInit {
-  user: RegistrasiUser;
+  user: User;
   verifyConfirm: EventEmitter<void> = new EventEmitter();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: RegistrasiUser, public dialogRef: MatDialogRef<VerifyConfirmComponent>) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: User, public dialogRef: MatDialogRef<VerifyConfirmComponent>) {}
 
   ngOnInit(): void {
     this.user = this.data;

@@ -1,5 +1,5 @@
-import { Users } from './Users.model';
+import { Accounts } from './Accounts.model';
 
-export interface TokenPayload extends Users {
+export interface TokenPayload extends Accounts {
   exp: any;
 }

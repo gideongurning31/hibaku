@@ -16,8 +16,8 @@ import { KomoditasFormComponent } from './pages/komoditas/komoditas-form/komodit
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
 import { SupplyDemandFormComponent } from './pages/supply-demand/supply-demand-form/supply-demand-form.component';
 import { RegProdusenComponent } from './pages/reg-produsen.component';
-import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
-import { VerifyConfirmComponent } from './pages/reg-penerima/verify-confirm/verify-confirm.component';
+import { UserManagementComponent } from './pages/user-management/user-management';
+import { VerifyConfirmComponent } from './pages/user-management/verify-confirm/verify-confirm.component';
 import { CommodityService } from './service/commodity-service';
 
 @NgModule({
@@ -30,7 +30,7 @@ import { CommodityService } from './service/commodity-service';
     SupplyDemandComponent,
     SupplyDemandFormComponent,
     RegProdusenComponent,
-    RegPenerimaComponent,
+    UserManagementComponent,
     VerifyConfirmComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSidenavModule, MatToolbarModule, MatButtonModule, MatDividerModule, MatTooltipModule, MenuRoutingModule, UtilsModule],

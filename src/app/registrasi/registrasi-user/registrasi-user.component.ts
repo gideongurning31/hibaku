@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
 import { RegistrasiService } from '../registrasi.service';
-import { RegistrasiUser } from '../Registrasi.model';
+import { User } from '../User.model';
 import * as moment from 'moment';
 
 @Component({
@@ -57,7 +57,7 @@ export class RegistrasiUserComponent extends BaseFormComponent implements OnInit
         address: form.address1.concat(` Desa/Kelurahan ${form.address2}`).concat(` Kecamatan ${form.address3}`),
         zipCode: form.zipCode,
         accountType: AccountType[form.accountType],
-      }).subscribe((resp: RegistrasiUser) => {
+      }).subscribe((resp: User) => {
         this.close();
         this.okResponse(subscription, `Registrasi user berhasil, silakan registrasi akun HIBAKU dengan NIK: ${resp.nik}`);
       }, err => this.onErrorResponse(subscription, err));

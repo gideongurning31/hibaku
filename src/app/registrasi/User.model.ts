@@ -1,4 +1,6 @@
-export interface RegistrasiUser {
+import { Accounts } from '../utils/model/Accounts.model';
+
+export interface User {
   nik: string;
   userId?: string;
   firstName: string;
@@ -9,6 +11,7 @@ export interface RegistrasiUser {
   address: string;
   zipCode: string;
   accountType: string;
+  account?: Accounts;
 }
 
 export interface RegistrasiAkun {

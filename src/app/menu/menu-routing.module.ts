@@ -6,7 +6,7 @@ import { HomeComponent } from './pages/home.component';
 import { TransaksiComponent } from './pages/transaksi.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
-import { RegPenerimaComponent } from './pages/reg-penerima/reg-penerima.component';
+import { UserManagementComponent } from './pages/user-management/user-management';
 
 const routes: Routes = [
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'registrasi-penerima',
-        component: RegPenerimaComponent,
+        component: UserManagementComponent,
         canActivate: [RouteGuard],
       },
     ],
