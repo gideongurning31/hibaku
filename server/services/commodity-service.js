@@ -12,7 +12,7 @@ class CommodityService {
   }
 
   getAll() {
-    return CommodityModel.findAll();
+    return CommodityModel.findAll({ order: [['type', 'ASC'], ['price', 'DESC']] });
   }
 
   create(payload) {
