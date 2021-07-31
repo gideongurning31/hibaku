@@ -4,6 +4,7 @@ const BaseController = require('../core/base-controller');
 const CommodityService = new (require('../services/commodity-service'))();
 
 class CommodityController extends BaseController {
+
   constructor() {
     super();
     self = this;
@@ -11,13 +12,13 @@ class CommodityController extends BaseController {
   }
 
   registerRoutes() {
-    self.router.route('/api/commodity').get(self.getAll).post(self.create).all(self.notImplemented);
+    self.router.route('/api/commodity').get(self.getAllPaging).post(self.create).all(self.notImplemented);
     self.router.route('/api/commodity/update/:id').post(self.update).all(self.notImplemented);
     self.router.route('/api/commodity/delete/:id').post(self.delete).all(self.notImplemented);
   }
 
-  getAll(req, res, next) {
-    return CommodityService.getAll()
+  getAllPaging(req, res, next) {
+    return CommodityService.getAllPaging(self.generatePaging(req.query))
       .then(result => res.status(200).json(result))
       .catch(next);
   }

@@ -12,11 +12,9 @@ class BaseController {
   }
 
   generatePaging(reqQuery) {
-    return {
-      page: parseInt(reqQuery.page) || 1,
-      limit: parseInt(reqQuery.limit) || 10,
-      offset: (parseInt(reqQuery.page) - 1) * parseInt(reqQuery.limit),
-    };
+    const page = parseInt(reqQuery.page) || 1;
+    const limit = parseInt(reqQuery.limit) || 10;
+    return { page, limit, offset: (page - 1) * limit };
   }
 
   notImplemented(req, res) {

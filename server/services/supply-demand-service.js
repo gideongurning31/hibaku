@@ -17,7 +17,7 @@ class SupplyDemandService extends BasePagingService {
     ];
   }
 
-  getAll(params) {
+  getAllPaging(params) {
     return UsersCommodityModel.findAndCountAll({
       limit: params.limit,
       offset: params.offset,

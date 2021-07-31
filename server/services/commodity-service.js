@@ -5,14 +5,21 @@ const Model = require('../models/index');
 const CommodityModel = Model.Commodities;
 const UsersCommodityModel = Model.UsersCommodities;
 const ApplicationError = require('../core/application-error');
+const BasePagingService = require('../core/base-paging-service');
 
-class CommodityService {
+class CommodityService extends BasePagingService {
+
   constructor() {
+    super();
     self = this;
   }
 
-  getAll() {
-    return CommodityModel.findAll({ order: [['type', 'ASC'], ['price', 'DESC']] });
+  getAllPaging(params) {
+    return CommodityModel.findAndCountAll({
+      limit: params.limit,
+      offset: params.offset,
+      order: [['type', 'ASC'], ['price', 'DESC']],
+    }).then(result => self.generatePaging(result, params));
   }
 
   create(payload) {

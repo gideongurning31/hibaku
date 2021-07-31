@@ -30,7 +30,7 @@ export class KomoditasComponent extends BaseFormComponent implements OnInit {
     this.tableHeaders = ['#', 'Nama Komoditas', 'Kategori', 'Satuan', 'Harga/satuan', ''];
     const subscription: Subscription = this.commodityService.fetchDataTable()
       .subscribe(resp => {
-        this.dataTable = resp;
+        this.dataTable = resp.data;
         this.okResponse(subscription);
       }, err => this.onErrorResponse(subscription, err));
   }
