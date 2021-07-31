@@ -10,8 +10,8 @@ export class CommodityService {
     return this.http.get('/commodity');
   }
 
-  fetchSupplyDemand() {
-    return this.http.get('/supply-demand');
+  fetchSupplyDemand(page: number = 1, limit: number = 10) {
+    return this.http.get('/supply-demand'.concat(`?page=${page}&limit=${limit}`));
   }
 
   submit(data: Commodity, type: ActionType = ActionType.CREATE) {

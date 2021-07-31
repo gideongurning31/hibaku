@@ -1,5 +1,6 @@
 'use strict';
 let service;
+const ApplicationError = require('./application-error');
 
 class BasePagingService {
   constructor() {
@@ -7,11 +8,18 @@ class BasePagingService {
   }
 
   generatePaging(result, params) {
-    const page = params && params.page ? params.page : 1;
     const limit = params && params.limit ? params.limit : 10;
-    const totalData = result.count;
-    const totalPage = Math.ceil(result.count / limit);
-    const paging = { page, limit: limit < totalData ? limit : totalData, totalData, totalPage };
+    const paging = {
+      page: params && params.page ? params.page : 1,
+      limit: limit < result.count ? limit : result.count,
+      startRow: params.offset + 1,
+      totalData: result.count,
+      totalPage: Math.ceil(result.count / limit),
+    };
+
+    if (paging.page > paging.totalPage) {
+      throw new ApplicationError('Page requested exceeds maximum page.');
+    }
     return { paging, data: result.rows };
   }
 }

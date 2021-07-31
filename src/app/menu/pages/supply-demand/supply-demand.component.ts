@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
+import { BasePagingComponent } from 'src/app/utils/component/base-paging.component';
+import { SupplyDemandFormComponent } from './supply-demand-form/supply-demand-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
 import { CommodityService, SupplyDemand } from '../../service/commodity-service';
-import { SupplyDemandFormComponent } from './supply-demand-form/supply-demand-form.component';
+import { Paging } from 'src/app/utils/component/pagination/pagination.component';
 
 @Component({
   selector: 'hibaku-supply-demand',
   templateUrl: './supply-demand.component.html',
   styleUrls: ['./supply-demand.component.scss'],
 })
-export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
+export class SupplyDemandComponent extends BasePagingComponent implements OnInit {
   tableHeaders: Array<string> = [];
   dataTable: Array<SupplyDemand> = [];
 
@@ -20,6 +21,7 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.initDataTable();
   }
 
@@ -27,9 +29,11 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
     if (emitter) emitter.unsubscribe();
     this.setSpinner(true);
     this.tableHeaders = ['#', 'Komoditas', 'Jumlah', 'Jenis', 'Harga (Total)', 'Atas Nama', 'Tanggal Masuk'];
-    const subscription: Subscription = this.commodityService.fetchSupplyDemand()
-      .subscribe(data => {
-        this.dataTable = data;
+    const subscription: Subscription = this.commodityService
+      .fetchSupplyDemand(this.paging.page, this.paging.limit)
+      .subscribe(resp => {
+        this.dataTable = resp.data;
+        this.setPage(resp.paging);
         this.okResponse(subscription);
       }, err => this.onErrorResponse(subscription, err));
   }
@@ -37,5 +41,10 @@ export class SupplyDemandComponent extends BaseFormComponent implements OnInit {
   openForm() {
     const dialogRef = this.matDialog.open(SupplyDemandFormComponent);
     const subscription: Subscription = dialogRef.componentInstance.afterSubmit.subscribe(() => this.initDataTable(subscription));
+  }
+
+  onPagingEvent(paging: Paging) {
+    this.paging = paging;
+    this.initDataTable();
   }
 }

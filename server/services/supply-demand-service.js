@@ -20,9 +20,9 @@ class SupplyDemandService extends BasePagingService {
   getAll(params) {
     return UsersCommodityModel.findAndCountAll({
       limit: params.limit,
-      offset: params.page,
+      offset: params.offset,
       include: self.includes,
-      order: [['createdDate', 'ASC']],
+      order: [['createdDate', 'DESC']],
     }).then(result => self.generatePaging(result, params));
   }
 
@@ -37,7 +37,7 @@ class SupplyDemandService extends BasePagingService {
   }
 
   delete(id) {
-    return UsersCommodityModel.destroy({ where: { id }});
+    return UsersCommodityModel.destroy({ where: { id } });
   }
 }
 
