@@ -18,7 +18,7 @@ export class RegistrasiService {
     return this.http.post('/account/verify', { userId, approval: true });
   }
 
-  fetchDataTable() {
-    return this.http.get('/user');
+  fetchDataTable(page: number = 1, limit: number = 10) {
+    return this.http.get('/user'.concat(`?page=${page}&limit=${limit}`));
   }
 }

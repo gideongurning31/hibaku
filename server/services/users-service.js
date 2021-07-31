@@ -1,4 +1,5 @@
 'use strict';
+let self;
 const Model = require('../models/index');
 const AccountsModel = Model.Accounts;
 const UsersInfoModel = Model.UsersInfo;
@@ -7,19 +8,30 @@ const moment = require('moment');
 const bcrypt = require('bcrypt');
 const saltRounds = parseInt(process.env.BCRYPT_SALT);
 const ApplicationError = require('../core/application-error');
+const BasePagingService = require('../core/base-paging-service');
 
-class UsersService {
-  constructor() {}
+class UsersService extends BasePagingService {
 
-  fetchAccounts() {
-    return AccountsModel.findAll({
-      where: { verified: true },
-      include: [{ model: RolesModel, as: 'role' }],
-    });
+  constructor() {
+    super();
+    self = this;
   }
 
-  fetchUsers() {
-    return UsersInfoModel.findAll();
+  fetchAccounts(params) {
+    return AccountsModel.findAndCountAll({
+      limit: params.limit,
+      offset: params.offset,
+      where: { verified: true },
+      attributes: { exclude: ['pass'] },
+      include: [{ model: RolesModel, as: 'role' }],
+    }).then(result => self.generatePaging(result, params));
+  }
+
+  fetchUsers(params) {
+    return UsersInfoModel.findAndCountAll({
+      limit: params.limit,
+      offset: params.offset,
+    }).then(result => self.generatePaging(result, params));
   }
 
   findByAccountName(username) {

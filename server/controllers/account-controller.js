@@ -17,7 +17,7 @@ class AccountController extends BaseController {
   }
 
   getAllAccount(req, res, next) {
-    UsersService.fetchAccounts()
+    UsersService.fetchAccounts(self.generatePaging(req.query))
       .then((result) => res.status(200).json(result))
       .catch(next);
   }
@@ -35,7 +35,7 @@ class AccountController extends BaseController {
   }
 
   getAllUser(req, res, next) {
-    UsersService.fetchUsers()
+    UsersService.fetchUsers(self.generatePaging(req.query))
       .then((result) => res.status(200).json(result))
       .catch(next);
   }
