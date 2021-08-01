@@ -9,7 +9,7 @@ import { User } from 'src/app/registrasi/User.model';
 })
 export class VerifyConfirmComponent implements OnInit {
   user: User;
-  verifyConfirm: EventEmitter<void> = new EventEmitter();
+  verifyConfirm: EventEmitter<boolean> = new EventEmitter();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: User, public dialogRef: MatDialogRef<VerifyConfirmComponent>) {}
 
@@ -18,7 +18,7 @@ export class VerifyConfirmComponent implements OnInit {
   }
 
   confirm() {
-    this.verifyConfirm.emit();
+    this.verifyConfirm.emit(!this.user.account.verified);
     this.dialogRef.close();
   }
 

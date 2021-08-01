@@ -14,8 +14,8 @@ export class RegistrasiService {
     return this.http.post('/account', user);
   }
 
-  verifyAccount(userId: string) {
-    return this.http.post('/account/verify', { userId, approval: true });
+  verifyAccount(userId: string, approval: boolean = true) {
+    return this.http.post('/account/verify', { userId, approval });
   }
 
   fetchDataTable(page: number = 1, limit: number = 10) {

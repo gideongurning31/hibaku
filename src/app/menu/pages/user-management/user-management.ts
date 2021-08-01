@@ -48,15 +48,16 @@ export class UserManagementComponent extends BasePagingComponent implements OnIn
 
   verifyUser(data: User) {
     const dialogRef = this.matDialog.open(VerifyConfirmComponent, { data });
-    const subscription: Subscription = dialogRef.componentInstance.verifyConfirm.subscribe(() => this.submitVerification(data.userId, subscription));
+    const subscription: Subscription = dialogRef.componentInstance.verifyConfirm.subscribe((approval: boolean) => this.submitVerification(data.userId, approval, subscription));
   }
 
-  private submitVerification(userId: string, dialogSubs: Subscription) {
+  private submitVerification(userId: string, approval: boolean, dialogSubs: Subscription) {
     dialogSubs.unsubscribe();
     const subscription: Subscription = this.regService
-      .verifyAccount(userId)
+      .verifyAccount(userId, approval)
       .subscribe(() => {
-        this.okResponse(subscription, `Akun user "${userId}" telah diverifikasi.`);
+        const status = approval ? 'diaktifkan' : 'dinon-aktifkan';
+        this.okResponse(subscription, `Akun user "${userId}" telah ${status}.`);
         this.initDataTable();
       }, err => this.onErrorResponse(subscription, err));
   }

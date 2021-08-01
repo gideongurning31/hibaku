@@ -1,5 +1,15 @@
 <div class="dialog-container">
-  <h5 style="text-align: center;"><strong>Apakah Anda yakin akan memberi verifikasi akun ini?</strong></h5>
+  <h5 style="text-align: center;">
+    <strong>
+      <ng-container *ngIf="user.account.verified; else verifyAccount">
+        Akun sudah terverifikasi&nbsp;
+        <i class="fa fa-check green"></i>
+      </ng-container>
+      <ng-template #verifyAccount>
+        Apakah Anda yakin akan memberi verifikasi akun ini?
+      </ng-template>
+    </strong>
+  </h5>
   <hr>
   <div class="row">
     <div class="col-md-2"></div>
@@ -21,7 +31,12 @@
   </div>
   <hr>
   <div class="button-container">
-    <button type="button" class="btn btn-primary" (click)="confirm()">VERIFIKASI</button>
-    <button type="button" class="btn btn-warning" (click)="close()">BATAL</button>
+    <button type="button"
+      class="btn"
+      [ngClass]="user.account.verified ? 'btn-danger' : 'btn-primary'"
+      (click)="confirm()">
+      {{ user.account.verified ? 'SUSPEND' : 'VERIFIKASI' }}
+    </button>
+    <button type="button" class="btn btn-warning" (click)="close()">TUTUP</button>
   </div>
 </div>

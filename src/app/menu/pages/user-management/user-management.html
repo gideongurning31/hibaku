@@ -9,7 +9,7 @@
             {{ data.nik }}
             <i class="fa"
               matTooltipPosition="after"
-              matTooltip="{{ data.userId ? 'User sudah registrasi akun' : 'User belum registrasi akun' }}"
+              matTooltip="User {{ data.userId ? 'sudah' : 'belum' }} registrasi akun"
               [ngClass]="data.userId ? 'fa-check green' : 'fa-times red'">
             </i>
           </td>
@@ -18,13 +18,13 @@
           <td>{{ data.birthPlace }}</td>
           <td>{{ data | fullAddress }}</td>
           <td>
-            <button type="button"
+            <button *ngIf="data.account"
+              type="button"
               class="btn btn-warning btn-table"
               matTooltipPosition="below"
-              matTooltip="Verifikasi Akun"
-              (click)="verifyUser(data)"
-              [disabled]="!data.userId || data.account.verified">
-              <i class="fa fa-pencil-square-o"></i>
+              matTooltip="{{data.account.verified ? 'Lihat Akun' : 'Verifikasi Akun' }}"
+              (click)="verifyUser(data)">
+              <i class="fa" [ngClass]="data.account.verified ? 'fa-external-link-square' : 'fa-pencil-square-o'"></i>
             </button>
           </td>
         </tr>

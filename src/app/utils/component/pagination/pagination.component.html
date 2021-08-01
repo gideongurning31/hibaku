@@ -3,9 +3,9 @@
     <form class="form-inline" *ngIf="paging.totalData">
       <span class="paging-text">Menampilkan:&emsp;</span>
       <div class="input-group" style="max-width: 100px;">
-        <input type="number" min="1" name="rows" class="form-control" max="{{ paging.totalData }}" [(ngModel)]="paging.limit">
+        <input type="number" min="1" max="{{ paging.totalData }}" [(ngModel)]="paging.limit" name="rows" class="form-control">
         <div class="input-group-append">
-          <button class="btn btn-warning" type="button" (click)="onSetRows()">
+          <button type="button" class="btn btn-warning" (click)="onSetRows()" matTooltipPosition="above" matTooltip="Muat ulang dengan tampilan {{ paging.limit }} data/halaman">
             <i class="fa fa-refresh"></i>
           </button>
         </div>
