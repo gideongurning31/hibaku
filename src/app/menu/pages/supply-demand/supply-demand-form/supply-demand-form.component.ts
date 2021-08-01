@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
@@ -12,39 +12,27 @@ import { CommodityService, Commodity } from 'src/app/menu/service/commodity-serv
   styleUrls: ['../supply-demand.component.scss', './supply-demand-form.component.scss'],
 })
 export class SupplyDemandFormComponent extends BaseFormComponent implements OnInit {
+
   form: FormGroup;
   commodities: Array<Commodity>;
   quantityUnit: string;
   afterSubmit: EventEmitter<void> = new EventEmitter();
 
-  constructor(private commodityService: CommodityService, public dialogRef: MatDialogRef<SupplyDemandFormComponent>, dialog: MatDialog, spinner: SpinnerCloakService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Array<Commodity>, private commodityService: CommodityService, public dialogRef: MatDialogRef<SupplyDemandFormComponent>, dialog: MatDialog, spinner: SpinnerCloakService) {
     super(dialog, spinner);
   }
 
   ngOnInit(): void {
+    this.commodities = this.data;
     this.initForm();
   }
 
   initForm(): void {
-    this.fetchCommodities();
     this.form = new FormGroup({
       commodityId: new FormControl(null, Validators.required),
       quantity: new FormControl(null, Validators.required),
       type: new FormControl(null, Validators.required),
     });
-  }
-
-  fetchCommodities() {
-    this.setSpinner(true);
-    this.commodities = [];
-    const subscription: Subscription = this.commodityService.getAllCommodities()
-      .subscribe(data => {
-        this.commodities = data;
-        this.okResponse(subscription);
-      }, err => {
-        this.dialogRef.close();
-        this.onErrorResponse(subscription, err);
-      });
   }
 
   submit() {
@@ -75,7 +63,7 @@ export class SupplyDemandFormComponent extends BaseFormComponent implements OnIn
 
   onSelectCommodity() {
     const id = this.form.get('commodityId').value;
-    this.commodities.forEach((commodity) => {
+    this.commodities.forEach(commodity => {
       if (id === commodity.id) {
         this.quantityUnit = commodity.unit;
       }

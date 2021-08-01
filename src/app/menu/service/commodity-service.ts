@@ -30,6 +30,10 @@ export class CommodityService {
     return this.http.post(endpoint, payload);
   }
 
+  getSupplyDemandById(id: string) {
+    return this.http.get('/supply-demand/'.concat(id));
+  }
+
   addSupply(payload: SupplyDemand) {
     payload.userId = localStorage.getItem('userId');
     return this.http.post('/supply-demand', payload);
