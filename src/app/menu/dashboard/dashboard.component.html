@@ -4,8 +4,11 @@
     <i class="fa" [ngClass]="sidenav.opened ? 'fa-times' : 'fa-bars'"></i>
     <span class="title">HIBAKU</span>
   </button>
-  <div class="active-menu" *ngIf="activeMenu">
-    {{ activeMenu }}
+  <div class="active-menu">
+    <ng-container *ngIf="activeMenu; else userId;">
+      <span style="text-transform: uppercase;">{{ activeMenu }}</span>
+    </ng-container>
+    <ng-template #userId><strong>{{ profile.id }}</strong></ng-template>
   </div>
 </mat-toolbar>
 <mat-sidenav-container>
@@ -20,7 +23,7 @@
             type="button"
             class="menu-button"
             (click)="navigate(menu)"
-            [ngClass]="{'current-menu': menu.name.toUpperCase() === activeMenu}">
+            [ngClass]="{'current-menu': menu.name === activeMenu}">
             <i class="fa" ngClass="{{ menu.icon }}"></i>
             <span class="menu-name">{{ menu.name }}</span>
           </button>

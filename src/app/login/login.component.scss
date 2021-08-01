@@ -21,13 +21,14 @@
 
 .logo-box {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-img.logo {
+.logo {
+  margin: 0;
   padding: 0;
-  margin: 15px;
-  max-width: 250px;
+  font-size: 220px;
 }
 
 .btn-login,

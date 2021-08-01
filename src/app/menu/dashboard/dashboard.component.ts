@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { AuthService } from 'src/app/utils/service/auth.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class DashboardComponent implements OnInit {
   profile: UserProfile;
   activeMenu: string;
 
-  constructor(private router: Router, private authService: AuthService, private observer: BreakpointObserver) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.initUserProfile();
@@ -45,15 +44,16 @@ export class DashboardComponent implements OnInit {
   }
 
   initActiveMenu() {
-    this.navMenu.forEach((menu) => {
-      if (this.router.url === '/'.concat(menu.route)) {
-        this.activeMenu = menu.name.toUpperCase();
-      }
+    this.router.events.subscribe(event => {
+      this.navMenu.forEach(menu => {
+        if (event instanceof NavigationEnd && event.url === '/'.concat(menu.route)) {
+          this.activeMenu = menu.name;
+        }
+      });
     });
   }
 
   navigate(menu: Menu) {
-    this.activeMenu = menu.name.toUpperCase();
     this.router.navigate([menu.route]);
     this.sidenav.close();
   }
