@@ -28,7 +28,7 @@ export class SupplyDemandComponent extends BasePagingComponent implements OnInit
   initDataTable(emitter?: Subscription) {
     if (emitter) emitter.unsubscribe();
     this.setSpinner(true);
-    this.tableHeaders = ['#', 'Komoditas', 'Jumlah', 'Jenis', 'Harga (Total)', 'Atas Nama', 'Tanggal Masuk'];
+    this.tableHeaders = ['#', 'Komoditas', 'Jumlah', 'Jenis', 'Harga (Total)', 'Atas Nama', 'Tanggal Masuk', 'Proses'];
     const subscription: Subscription = this.commodityService
       .fetchSupplyDemand(this.paging.page, this.paging.limit)
       .subscribe(resp => {
@@ -36,6 +36,10 @@ export class SupplyDemandComponent extends BasePagingComponent implements OnInit
         this.setPage(resp.paging);
         this.okResponse(subscription);
       }, err => this.onErrorResponse(subscription, err));
+  }
+
+  processTransaction(id: string) {
+    console.log(id);
   }
 
   openForm() {

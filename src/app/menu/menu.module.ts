@@ -10,7 +10,8 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { UtilsModule } from '../utils/utils.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
-import { TransaksiComponent } from './pages/transaksi.component';
+import { TransactionComponent } from './pages/transaction/transaction.component';
+import { TransactionInputComponent } from './pages/transaction/transaction-input/transaction-input.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { KomoditasFormComponent } from './pages/komoditas/komoditas-form/komoditas-form.component';
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
@@ -23,7 +24,8 @@ import { CommodityService } from './service/commodity-service';
   declarations: [
     DashboardComponent,
     HomeComponent,
-    TransaksiComponent,
+    TransactionComponent,
+    TransactionInputComponent,
     KomoditasComponent,
     KomoditasFormComponent,
     SupplyDemandComponent,

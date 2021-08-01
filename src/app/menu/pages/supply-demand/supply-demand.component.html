@@ -11,6 +11,15 @@
           <td>{{ data.quantity * data.commodityDetails.price | currency: 'Rp. ' }}</td>
           <td>{{ data.userDetails.displayName }} - <strong>{{ data.userId }}</strong></td>
           <td>{{ data.createdDate | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button type="button"
+              class="btn btn-table btn-primary"
+              matTooltipPosition="right"
+              matTooltip="Proses {{ data.type === 'SUPPLY' ? 'pasokan' : 'permintaan' }}"
+              (click)="processTransaction(data.id)">
+              <i class="fa fa-exchange "></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

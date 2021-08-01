@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RouteGuard, AdminGuard } from '../utils/service/route-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
-import { TransaksiComponent } from './pages/transaksi.component';
+import { TransactionComponent } from './pages/transaction/transaction.component';
 import { KomoditasComponent } from './pages/komoditas/komoditas.component';
 import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.component';
 import { UserManagementComponent } from './pages/user-management/user-management';
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'transaksi',
-        component: TransaksiComponent,
+        component: TransactionComponent,
         canActivate: [RouteGuard, AdminGuard],
       },
       {
