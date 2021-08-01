@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  let UsersCommodities = sequelize.define(
-    'UsersCommodities',
+  let SupplyDemand = sequelize.define(
+    'SupplyDemand',
     {
       id: { type: DataTypes.STRING(36), primaryKey: true },
       userId: { type: DataTypes.STRING(50), allowNull: false },
@@ -17,16 +17,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  UsersCommodities.associate = models => {
-    models.UsersCommodities.belongsTo(models.Accounts, {
+  SupplyDemand.associate = models => {
+    models.SupplyDemand.belongsTo(models.UsersInfo, {
+      foreignKey: 'userId',
+      targetKey: 'userId',
+      as: 'userDetails',
+    });
+    models.SupplyDemand.belongsTo(models.Accounts, {
       foreignKey: 'userId',
       as: 'accountDetails',
     });
-    models.UsersCommodities.belongsTo(models.Commodities, {
+    models.SupplyDemand.belongsTo(models.Commodities, {
       foreignKey: 'commodityId',
       as: 'commodityDetails',
     });
   };
 
-  return UsersCommodities;
+  return SupplyDemand;
 };

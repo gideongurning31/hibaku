@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     models.Commodities.belongsToMany(models.Accounts, {
       onDelete: 'RESTRICT',
       onUpdate: 'CASCADE',
-      through: models.UsersCommodities,
+      through: models.SupplyDemand,
       foreignKey: 'commodityId',
       as: 'accountDetails',
     });

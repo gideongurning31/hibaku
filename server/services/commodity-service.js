@@ -3,7 +3,7 @@ let self;
 const uuid = require('uuid');
 const Model = require('../models/index');
 const CommodityModel = Model.Commodities;
-const UsersCommodityModel = Model.UsersCommodities;
+const SupplyDemandModel = Model.SupplyDemand;
 const ApplicationError = require('../core/application-error');
 const BasePagingService = require('../core/base-paging-service');
 
@@ -47,7 +47,7 @@ class CommodityService extends BasePagingService {
   }
 
   delete(id) {
-    return UsersCommodityModel.findOne({ where: { commodityId: id }})
+    return SupplyDemandModel.findOne({ where: { commodityId: id }})
       .then(result => {
         if (result) throw new ApplicationError(`Komoditas tidak dapat dihapus, karena masih digunakan dalam transaksi yang berlangsung.`);
         return CommodityModel.destroy({ where: { id } });

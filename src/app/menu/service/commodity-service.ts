@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActionType } from 'src/app/utils/model/ActionType.enum';
 import { HttpUtilService } from 'src/app/utils/service/http-util.service';
+import { ActionType } from 'src/app/utils/model/ActionType.enum';
+import { User } from 'src/app/registrasi/User.model';
 
 @Injectable()
 export class CommodityService {
@@ -51,6 +52,7 @@ export interface Commodity {
 export interface SupplyDemand {
   id?: string;
   userId: string;
+  userDetails?: User;
   accountDetails: SupplyDemandUser;
   commodityId: string;
   commodityDetails: SupplyDemandItem;
