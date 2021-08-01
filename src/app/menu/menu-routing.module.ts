@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RouteGuard } from '../utils/service/route-guard.service';
+import { RouteGuard, AdminGuard } from '../utils/service/route-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TransaksiComponent } from './pages/transaksi.component';
@@ -21,12 +21,12 @@ const routes: Routes = [
       {
         path: 'transaksi',
         component: TransaksiComponent,
-        canActivate: [RouteGuard],
+        canActivate: [RouteGuard, AdminGuard],
       },
       {
         path: 'komoditas',
         component: KomoditasComponent,
-        canActivate: [RouteGuard],
+        canActivate: [RouteGuard, AdminGuard],
       },
       {
         path: 'supply-demand',
@@ -36,7 +36,7 @@ const routes: Routes = [
       {
         path: 'registrasi-penerima',
         component: UserManagementComponent,
-        canActivate: [RouteGuard],
+        canActivate: [RouteGuard, AdminGuard],
       },
     ],
   },

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { LoginGuard, RouteGuard } from './service/route-guard.service';
+import { RouteGuard, AdminGuard, LoginGuard } from './service/route-guard.service';
 import { HttpUtilService } from './service/http-util.service';
 import { AuthService } from './service/auth.service';
 import { SpinnerCloakService } from './component/spinner-cloak/spinner-cloak.service';
@@ -22,7 +22,7 @@ import { OnlyNumericPipe } from './pipe/only-numeric.pipe';
   imports: [CommonModule, HttpClientModule, FormsModule, MatDialogModule, MatProgressSpinnerModule, MatTooltipModule],
   declarations: [BaseFormComponent, BasePagingComponent, AlertDialogComponent, SpinnerCloakComponent, PaginationComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
   entryComponents: [],
-  providers: [RouteGuard, LoginGuard, HttpUtilService, AuthService, SpinnerCloakService],
+  providers: [RouteGuard, AdminGuard, LoginGuard, HttpUtilService, AuthService, SpinnerCloakService],
   exports: [BaseFormComponent, BasePagingComponent, SpinnerCloakComponent, PaginationComponent, FullAddressPipe, NoWhitespacePipe, OnlyNumericPipe],
 })
 export class UtilsModule {}

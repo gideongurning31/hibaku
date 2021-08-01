@@ -13,6 +13,18 @@ export class RouteGuard implements CanActivate {
 }
 
 @Injectable()
+export class AdminGuard implements CanActivate {
+  constructor(private router: Router) {}
+
+  canActivate(): boolean {
+    const roleId = localStorage.getItem('roleId');
+    if (roleId === '1') return true;
+    this.router.navigate(['']);
+    return false;
+  }
+}
+
+@Injectable()
 export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
 

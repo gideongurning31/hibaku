@@ -3,6 +3,7 @@ import { ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/utils/service/auth.service';
+import { allMenu } from './dashboard-menu.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,19 +28,18 @@ export class DashboardComponent implements OnInit {
     this.profile = {
       id: localStorage.getItem('userId'),
       name: localStorage.getItem('displayName'),
-      role: localStorage.getItem('roleName'),
+      roleId: localStorage.getItem('roleId'),
+      roleName: localStorage.getItem('roleName'),
     };
   }
 
   initMenu() {
-    if (this.profile.role) {
-      this.navMenu = [
-        { name: 'Beranda', icon: 'fa-home', route: '' },
-        { name: 'Transaksi', icon: 'fa-handshake-o', route: 'transaksi' },
-        { name: 'Komoditas', icon: 'fa-shopping-basket', route: 'komoditas' },
-        { name: 'Supply / Demand', icon: 'fa-cart-plus', route: 'supply-demand' },
-        { name: 'Registrasi User', icon: 'fa-id-card-o', route: 'registrasi-penerima' },
-      ];
+    if (this.profile.roleId) {
+      allMenu.forEach(menu => {
+        if (!menu.admin || (menu.admin && this.profile.roleId === '1')) {
+          this.navMenu.push(menu);
+        }
+      });
     }
   }
 
@@ -63,14 +63,16 @@ export class DashboardComponent implements OnInit {
   }
 }
 
-interface UserProfile {
-  id: string;
-  name: string;
-  role: string;
-}
-
-interface Menu {
+export interface Menu {
   name: string;
   icon: string;
   route: string;
+  admin: boolean;
+}
+
+interface UserProfile {
+  id: string;
+  name: string;
+  roleId: string;
+  roleName: string;
 }
