@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
-import { CommodityService, Commodity } from 'src/app/menu/service/commodity-service';
+import { CommodityService, Commodity } from 'src/app/menu/service/commodity.service';
 
 @Component({
   selector: 'hibaku-supply-demand-form',

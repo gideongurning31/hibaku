@@ -18,7 +18,8 @@ import { SupplyDemandComponent } from './pages/supply-demand/supply-demand.compo
 import { SupplyDemandFormComponent } from './pages/supply-demand/supply-demand-form/supply-demand-form.component';
 import { UserManagementComponent } from './pages/user-management/user-management';
 import { VerifyConfirmComponent } from './pages/user-management/verify-confirm/verify-confirm.component';
-import { CommodityService } from './service/commodity-service';
+import { CommodityService } from './service/commodity.service';
+import { TransactionService } from './service/transaction.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,6 @@ import { CommodityService } from './service/commodity-service';
     VerifyConfirmComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSidenavModule, MatToolbarModule, MatButtonModule, MatDividerModule, MatTooltipModule, MenuRoutingModule, UtilsModule],
-  providers: [CommodityService],
+  providers: [CommodityService, TransactionService],
 })
 export class MenuModule {}

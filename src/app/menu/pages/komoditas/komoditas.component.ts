@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { BasePagingComponent } from 'src/app/utils/component/base-paging.component';
 import { KomoditasFormComponent } from './komoditas-form/komoditas-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
-import { CommodityService, Commodity } from '../../service/commodity-service';
+import { CommodityService, Commodity } from '../../service/commodity.service';
 import { ActionType } from 'src/app/utils/model/ActionType.enum';
 import { Paging } from 'src/app/utils/component/pagination/pagination.component';
 

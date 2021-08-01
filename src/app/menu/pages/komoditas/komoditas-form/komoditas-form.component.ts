@@ -5,7 +5,7 @@ import { KeyValue } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
-import { CommodityService, Commodity } from 'src/app/menu/service/commodity-service';
+import { CommodityService, Commodity } from 'src/app/menu/service/commodity.service';
 import { ActionType } from 'src/app/utils/model/ActionType.enum';
 
 @Component({

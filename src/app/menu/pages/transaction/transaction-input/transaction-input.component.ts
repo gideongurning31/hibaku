@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewInit, Inject, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { BaseFormComponent } from 'src/app/utils/component/base-form.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
-import { SupplyDemand } from 'src/app/menu/service/commodity-service';
+import { TransactionService } from 'src/app/menu/service/transaction.service';
+import { SupplyDemand } from 'src/app/menu/service/commodity.service';
 
 @Component({
   selector: 'hibaku-transaction-input',
@@ -15,8 +17,15 @@ export class TransactionInputComponent extends BaseFormComponent implements OnIn
   form: FormGroup;
   userKind: string;
   kind: string;
+  trxFound: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: SupplyDemand, private dialogRef: MatDialogRef<TransactionInputComponent>, dialog: MatDialog, spinner: SpinnerCloakService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: SupplyDemand,
+    private trxService: TransactionService,
+    private dialogRef: MatDialogRef<TransactionInputComponent>,
+    dialog: MatDialog,
+    spinner: SpinnerCloakService
+  ) {
     super(dialog, spinner);
   }
 
@@ -52,10 +61,17 @@ export class TransactionInputComponent extends BaseFormComponent implements OnIn
 
   submit() {
     this.setSpinner(true);
-    setTimeout(() => {
-      this.setSpinner(false);
-      this.alertDialog(`Kandidat ${this.data.type === 'SUPPLY' ? 'Penerima' : 'Pemasok'} Hibah tidak ditemukan.`);
-    }, 1500);
+    const subscription: Subscription = this.trxService
+      .findTransactionCandidate(this.data.commodityId, this.data.type)
+      .subscribe(result => {
+        this.okResponse(subscription, result);
+        this.trxFound = true;
+      }, err => setTimeout(() => this.onErrorResponse(subscription, err), 1500));
+  }
+
+  processTransaction() {
+    this.close();
+    this.alertDialog('Transaksi diproses.');
   }
 
   close() {

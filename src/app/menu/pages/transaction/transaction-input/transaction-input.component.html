@@ -29,7 +29,10 @@
     </div>
     <hr>
     <div class="button-container">
-      <button type="submit" class="btn btn-primary">PROSES</button>
+      <button type="submit" class="btn btn-primary" *ngIf="!trxFound; else executeTrx">CARI KANDIDAT</button>
+      <ng-template #executeTrx>
+        <button type="button" class="btn btn-success" (click)="processTransaction()">PROSES</button>
+      </ng-template>
       <button type="button" class="btn btn-warning" (click)="close()">BATAL</button>
     </div>
   </form>
