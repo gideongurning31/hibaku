@@ -1,3 +1,12 @@
-<div class="coming-soon">
-  <h1>COMING SOON</h1>
+<h2 class="main-title primary-text">
+  Selamat datang di Aplikasi HIBAKU
+</h2>
+<div class="row">
+  <div class="main-icon" *ngFor="let m of menu">
+    <h5 class="primary-text"><i class="fa fa-dot-circle-o"></i>&emsp;Fitur {{ m.title }} dapat diakses melalui menu:
+    </h5>
+    <button type="button" class="btn btn-main-menu" (click)="navigate(m.route)">
+      <h5>{{ m.name }}&nbsp;<i class="gg gg-hibaku"></i></h5>
+    </button>
+  </div>
 </div>
