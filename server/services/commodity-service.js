@@ -14,6 +14,12 @@ class CommodityService extends BasePagingService {
     self = this;
   }
 
+  getAll() {
+    return CommodityModel.findAll({
+      order: [['type', 'ASC'], ['price', 'DESC']]
+    });
+  }
+
   getAllPaging(params) {
     return CommodityModel.findAndCountAll({
       limit: params.limit,

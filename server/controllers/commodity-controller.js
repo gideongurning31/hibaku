@@ -13,8 +13,15 @@ class CommodityController extends BaseController {
 
   registerRoutes() {
     self.router.route('/api/commodity').get(self.getAllPaging).post(self.create).all(self.notImplemented);
+    self.router.route('/api/commodity/all').get(self.getAll).all(self.notImplemented);
     self.router.route('/api/commodity/update/:id').post(self.update).all(self.notImplemented);
     self.router.route('/api/commodity/delete/:id').post(self.delete).all(self.notImplemented);
+  }
+
+  getAll(req, res, next) {
+    return CommodityService.getAll()
+      .then((result) => res.status(200).json(result))
+      .catch(next);
   }
 
   getAllPaging(req, res, next) {

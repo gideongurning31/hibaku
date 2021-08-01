@@ -37,11 +37,14 @@ export class SupplyDemandFormComponent extends BaseFormComponent implements OnIn
   fetchCommodities() {
     this.setSpinner(true);
     this.commodities = [];
-    const subscription: Subscription = this.commodityService.fetchDataTable()
+    const subscription: Subscription = this.commodityService.getAllCommodities()
       .subscribe(data => {
         this.commodities = data;
         this.okResponse(subscription);
-      }, err => this.onErrorResponse(subscription, err));
+      }, err => {
+        this.dialogRef.close();
+        this.onErrorResponse(subscription, err);
+      });
   }
 
   submit() {
