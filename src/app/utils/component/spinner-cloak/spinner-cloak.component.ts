@@ -9,9 +9,16 @@ import { SpinnerCloakService } from './spinner-cloak.service';
 export class SpinnerCloakComponent implements OnInit {
   constructor(private spinnerService: SpinnerCloakService) {}
 
-  showSpinner: boolean;
+  showSpinner: number;
 
   ngOnInit() {
-    this.spinnerService.displaySpinner$.subscribe((display: boolean) => (this.showSpinner = display));
+    this.showSpinner = 0;
+    this.spinnerService.displaySpinner$.subscribe((display: boolean) => {
+      if (display) {
+        this.showSpinner += 1;
+      } else if (!display && this.showSpinner > 0) {
+        this.showSpinner -= 1;
+      }
+    });
   }
 }
