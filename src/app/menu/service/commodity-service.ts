@@ -51,7 +51,7 @@ export interface Commodity {
 export interface SupplyDemand {
   id?: string;
   userId: string;
-  userDetails: SupplyDemandUser;
+  accountDetails: SupplyDemandUser;
   commodityId: string;
   commodityDetails: SupplyDemandItem;
   quantity: number;

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { BasePagingComponent } from 'src/app/utils/component/base-paging.component';
 import { SupplyDemandFormComponent } from './supply-demand-form/supply-demand-form.component';
+import { TransactionInputComponent } from '../transaction/transaction-input/transaction-input.component';
 import { SpinnerCloakService } from 'src/app/utils/component/spinner-cloak/spinner-cloak.service';
 import { CommodityService, Commodity, SupplyDemand } from '../../service/commodity-service';
 import { Paging } from 'src/app/utils/component/pagination/pagination.component';
@@ -52,7 +53,13 @@ export class SupplyDemandComponent extends BasePagingComponent implements OnInit
   }
 
   processTransaction(id: string) {
-    console.log(id);
+    this.setSpinner(true);
+    const subscription: Subscription = this.commodityService
+      .getSupplyDemandById(id)
+      .subscribe((transaction: SupplyDemand) => {
+        this.okResponse(subscription);
+        this.matDialog.open(TransactionInputComponent, { data: transaction });
+      }, err => this.onErrorResponse(subscription, err));
   }
 
   openForm() {

@@ -69,7 +69,7 @@ class UsersService extends BasePagingService {
         return AccountsModel.create({
           userId: payload.userId,
           pass: bcrypt.hashSync(payload.pass, bcrypt.genSaltSync(saltRounds)),
-          displayName: info.lastName ? `${info.firstName}${info.lastName}` : info.firstName,
+          displayName: info.lastName ? `${info.firstName} ${info.lastName}` : info.firstName,
           roleId: parseInt(user.accountType),
           verified: false,
         });

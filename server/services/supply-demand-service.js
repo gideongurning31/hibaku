@@ -2,7 +2,7 @@
 let self;
 const uuid = require('uuid');
 const Model = require('../models/index');
-const UserModel = Model.Accounts;
+const AccountModel = Model.Accounts;
 const CommodityModel = Model.Commodities;
 const UsersCommodityModel = Model.UsersCommodities;
 const BasePagingService = require('../core/base-paging-service');
@@ -12,7 +12,7 @@ class SupplyDemandService extends BasePagingService {
     super();
     self = this;
     self.includes = [
-      { model: UserModel, as: 'userDetails', attributes: ['displayName', 'roleId'] },
+      { model: AccountModel, as: 'accountDetails', attributes: ['displayName', 'roleId'] },
       { model: CommodityModel, as: 'commodityDetails', attributes: ['name', 'type', 'unit', 'price'] },
     ];
   }

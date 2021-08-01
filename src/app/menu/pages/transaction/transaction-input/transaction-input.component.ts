@@ -1,8 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SupplyDemand } from 'src/app/menu/service/commodity-service';
 
 @Component({
   selector: 'hibaku-transaction-input',
-  template: '<div class="coming-soon"><h1>COMING SOON</h1></div>',
-  styles: ['.coming-soon { width: 100%; height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; }'],
+  templateUrl: './transaction-input.component.html',
+  styleUrls: ['./transaction-input.component.scss'],
 })
-export class TransactionInputComponent {}
+export class TransactionInputComponent implements OnInit {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: SupplyDemand) {}
+
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+
+}

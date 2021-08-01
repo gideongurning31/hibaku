@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   UsersCommodities.associate = models => {
     models.UsersCommodities.belongsTo(models.Accounts, {
       foreignKey: 'userId',
-      as: 'userDetails',
+      as: 'accountDetails',
     });
     models.UsersCommodities.belongsTo(models.Commodities, {
       foreignKey: 'commodityId',

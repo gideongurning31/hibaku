@@ -9,7 +9,7 @@
           <td>{{ data.quantity + ' ' + data.commodityDetails.unit }}</td>
           <td>{{ data.type === 'SUPPLY' ? 'PASOKAN' : 'PERMINTAAN' }}</td>
           <td>{{ data.quantity * data.commodityDetails.price | currency: 'Rp. ' }}</td>
-          <td>{{ data.userDetails.displayName }} - <strong>{{ data.userId }}</strong></td>
+          <td>{{ data.accountDetails.displayName }} - <strong>{{ data.userId }}</strong></td>
           <td>{{ data.createdDate | date: 'dd/MM/yyyy' }}</td>
           <td>
             <button type="button"
