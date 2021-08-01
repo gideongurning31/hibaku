@@ -1,8 +1,17 @@
 .dialog-container {
   min-width: 70vw;
-  min-height: 500px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  flex-direction: column;
+  padding: 20px 80px;
+}
+
+.button-container {
+  display: flex;
+  margin-top: 35px;
+  justify-content: space-around;
+}
+
+button.btn {
+  min-width: 300px;
+  padding: 10px;
 }

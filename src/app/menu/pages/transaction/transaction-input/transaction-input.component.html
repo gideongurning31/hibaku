@@ -1,3 +1,36 @@
 <div class="dialog-container">
-  <h3>COMING SOON</h3>
+  <h3 style="font-weight: bold; text-align: center;">Informasi {{ kind }} Hibah</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <hr>
+    <div class="form-group row">
+      <label for="inputUser" class="col-sm-3 col-form-label"><strong>Pemohon:</strong></label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="user" class="form-control" id="inputUser" readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputItem" class="col-sm-3 col-form-label"><strong>Komoditas:</strong></label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="item" class="form-control" id="inputItem" readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputCost" class="col-sm-3 col-form-label"><strong>Estimasi biaya:</strong></label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="cost" class="form-control" id="inputCost" [value]="form.get('cost').value | currency: 'Rp. '" readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputLocation"
+        class="col-sm-3 col-form-label"><strong>{{ 'Alamat '.concat(userKind) }}:</strong></label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="location" class="form-control" id="inputLocation" readonly />
+      </div>
+    </div>
+    <hr>
+    <div class="button-container">
+      <button type="submit" class="btn btn-primary">PROSES</button>
+      <button type="button" class="btn btn-warning" (click)="close()">BATAL</button>
+    </div>
+  </form>
 </div>
